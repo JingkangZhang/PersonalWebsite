@@ -19,8 +19,9 @@
 
 		<script src="js/three.js"></script>
 		<script src="node_modules/three/examples/js/loaders/PLYLoader.js"></script>
-		<script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script>
+		<!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
 		<script src="node_modules/three/examples/js/controls/TrackballControls.js"></script>
+		<script src="node_modules/three/examples/js/controls/OrbitControls.js"></script>
 		<script>
 			var container;
 			var camera, controls, scene, renderer;
@@ -30,20 +31,35 @@
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0x000000 );
 				camera = new THREE.PerspectiveCamera( 15, window.innerWidth / window.innerHeight, 0.01, 40 );
-				camera.position.x = 0.4;
-				camera.position.z = - 2;
-				camera.up.set( 0, 0, 1 );
-				controls = new THREE.TrackballControls( camera );
-				controls.rotateSpeed = 2.0;
-				// controls.zoomSpeed = 0.3;
-				// controls.panSpeed = 0.2;
-				controls.noZoom = true;
-				controls.noPan = true;
-				controls.staticMoving = true;
-				controls.dynamicDampingFactor = 0.3;
-				controls.minDistance = 0.3;
-				controls.maxDistance = 0.3 * 100;
-				console.log(controls);
+				camera.position.x = 1;
+				// camera.position.z = 0; // - 2
+				// camera.up.set( 0, 0, 1 );
+
+				// controls = new THREE.TrackballControls( camera );
+				// controls.rotateSpeed = 2.0;
+				// // controls.zoomSpeed = 0.3;
+				// // controls.panSpeed = 0.2;
+				// controls.noZoom = true;
+				// controls.noPan = true;
+				// controls.staticMoving = true;
+				// controls.dynamicDampingFactor = 0.3;
+				// controls.minDistance = 0.3;
+				// controls.maxDistance = 0.3 * 100;
+
+				// controls
+				controls = new THREE.OrbitControls(camera);
+				//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
+				// controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = true;
+				controls.minDistance = 2;
+				controls.maxDistance = 2;
+				controls.maxPolarAngle = Math.PI / 2;
+				controls.minPolarAngle = Math.PI / 2; // radians
+				controls.minAzimuthAngle = - Math.PI / 6; // radians
+				controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
+				controls.rotateSpeed = 0.7;
+
 				scene.add( camera );
 				renderer = new THREE.WebGLRenderer( { antialias: true } );
 				renderer.setPixelRatio( window.devicePixelRatio );
@@ -56,7 +72,7 @@
 					var material = new THREE.PointsMaterial( { size: 0.005 } );
 					// geometry.addAttribute( 'color', []);
 					material.color.setHex( Math.random() * 0xffffff );
-					console.log("geometry, ", geometry);
+					// console.log("geometry, ", geometry);
 					// build mesh
 					var mesh = new THREE.Points( geometry, material );
 					mesh.name = "headp.ply";
