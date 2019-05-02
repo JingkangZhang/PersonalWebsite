@@ -11,12 +11,17 @@
 				margin: 0px;
 				overflow: hidden;
 			}
+			#info {
+				text-align: center;
+			}
 
 		</style>
 	</head>
 
 	<body>
-
+		<div id="info">
+			<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - orbit controls example
+		</div>
 		<script src="js/three.js"></script>
 		<script src="node_modules/three/examples/js/loaders/PLYLoader.js"></script>
 		<!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
@@ -80,6 +85,8 @@
 					scene.add( mesh );
 
 					var center = mesh.geometry.boundingSphere.center;
+					center.x -= 0.03;
+					center.y += 0.03;
 					controls.target.set( center.x, center.y, center.z );
 					controls.update();
 				} );
