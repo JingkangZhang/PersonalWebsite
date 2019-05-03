@@ -22,39 +22,34 @@
 		<div id="info">
 			<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - orbit controls example
 		</div>
+		<div id="container" style="width: 600px; height: 600px;"> </div>
+
 		<script src="js/three.js"></script>
 		<script src="node_modules/three/examples/js/loaders/PLYLoader.js"></script>
 		<!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
 		<script src="node_modules/three/examples/js/controls/TrackballControls.js"></script>
 		<script src="node_modules/three/examples/js/controls/OrbitControls.js"></script>
 		<script>
-			var container;
 			var camera, controls, scene, renderer;
+			var container = document.getElementById("container");
 			init();
 			animate();
 			function init() {
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( container.offsetWidth, container.offsetHeight );
+				container.appendChild( renderer.domElement );
+
 				scene = new THREE.Scene();
 				scene.background = new THREE.Color( 0x000000 );
-				camera = new THREE.PerspectiveCamera( 15, window.innerWidth / window.innerHeight, 0.01, 40 );
+				camera = new THREE.PerspectiveCamera( 15, container.offsetWidth / container.offsetHeight, 0.01, 40 );
 				camera.position.x = 1;
 				// camera.position.z = 0; // - 2
 				// camera.up.set( 0, 0, 1 );
 
-				// controls = new THREE.TrackballControls( camera );
-				// controls.rotateSpeed = 2.0;
-				// // controls.zoomSpeed = 0.3;
-				// // controls.panSpeed = 0.2;
-				// controls.noZoom = true;
-				// controls.noPan = true;
-				// controls.staticMoving = true;
-				// controls.dynamicDampingFactor = 0.3;
-				// controls.minDistance = 0.3;
-				// controls.maxDistance = 0.3 * 100;
-
 				// controls
-				controls = new THREE.OrbitControls(camera);
-				//controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
-				// controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
+				controls = new THREE.OrbitControls(camera, container);
 				controls.dampingFactor = 0.25;
 				controls.screenSpacePanning = true;
 				controls.minDistance = 2;
@@ -66,10 +61,8 @@
 				controls.rotateSpeed = 0.7;
 
 				scene.add( camera );
-				renderer = new THREE.WebGLRenderer( { antialias: true } );
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				document.body.appendChild( renderer.domElement );
+
+
 				var loader = new THREE.PLYLoader();
 				loader.load( 'headp.ply', function ( geometry ) {
 					// var color = [];
@@ -90,16 +83,14 @@
 					controls.target.set( center.x, center.y, center.z );
 					controls.update();
 				} );
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
-				container.appendChild( renderer.domElement );
+
 				window.addEventListener( 'resize', onWindowResize, false );
 				window.addEventListener( 'keypress', keyboard );
 			}
 			function onWindowResize() {
-				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.aspect = container.offsetWidth / container.offsetHeight;
 				camera.updateProjectionMatrix();
-				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.setSize( container.offsetWidth, container.offsetHeight );
 				controls.handleResize();
 			}
 			function keyboard( ev ) {
