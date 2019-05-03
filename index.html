@@ -88,6 +88,7 @@
 		<!-- <script src="./js/three/examples/js/controls/TrackballControls.js"></script> -->
 		<script src="./js/three/examples/js/controls/OrbitControls.js"></script>
 		<script>
+			var model_url = "./models/headp_no_normal.ply"
 			var camera, controls, scene, renderer;
 			var container = document.getElementById("container");
 			init();
@@ -133,7 +134,7 @@
 					}
 				}
 
-				loader.load( 'headp.ply', function ( geometry ) {
+				loader.load( model_url, function ( geometry ) {
 					// var color = [];
 					// tout.style.display = "none";
 					// tout.style.position = "absolute";
