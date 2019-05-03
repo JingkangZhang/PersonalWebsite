@@ -64,12 +64,18 @@
 
 			  100% { top:0 }
 			}
+			#container {
+				margin:auto;
+				width: 50vw;
+				height: 80vh;
+
+			}
 		</style>
 	</head>
 
 	<body>
 
-		<div id="container" style="width: 100vw; height: 80vh;">
+		<div id="container">
 			<div id="tout">
 			  <div>
 			    <div>
@@ -193,7 +199,7 @@
 
 							var center = mesh.geometry.boundingSphere.center;
 							center.x -= 0.03;
-							center.y += 0.03;
+							center.y += 0;
 							controls.target.set( center.x, center.y, center.z );
 							controls.update();
 					};
@@ -206,11 +212,11 @@
 
 					} ).then( function ( buffer ) {
 						return JSZip.loadAsync( buffer ).then(function(zip) {
-							console.log(zip);
+							// console.log(zip);
 								    return zip.file(unzipped_name).async("string");
 								});;
 					} ).then( function ( text ) {
-						console.log(text);
+						// console.log(text);
 						onLoad( THREE.PLYLoader.prototype.parse( text ) );
 					});
 
