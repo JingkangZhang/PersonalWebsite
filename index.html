@@ -66,7 +66,7 @@
 	</head>
 
 	<body>
-		<div id="container" style="width: 600px; height: 600px;">
+		<div id="container" style="width: 400px; height: 400px;">
 			<div id="tout">
 			  <div>
 			    <div>
@@ -131,7 +131,8 @@
 				loader.load( 'headp.ply', function ( geometry ) {
 					// var color = [];
 					// tout.style.display = "none";
-					tout.style.position = "absolute";
+					// tout.style.position = "absolute";
+					tout.parentNode.removeChild(tout);
 					var material = new THREE.PointsMaterial( { size: 0.005 } );
 					// geometry.addAttribute( 'color', []);
 					material.color.setHex( Math.random() * 0xffffff );
