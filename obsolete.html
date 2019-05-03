@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Jingkang Zhang</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: #000;
+				color: #fff;
+				margin: 0px;
+				overflow: hidden;
+			}
+			#info {
+				text-align: center;
+			}
+
+			#tout {
+			  position: relative;
+			  top: 50%;
+			  transform: translateY(-50%);
+			}
+			#tout:first-child div {
+			  display: block;
+			  width: 100px;
+			  height: 100px;
+			  border: 3px solid #bbb;
+			  border-radius: 50%;
+			  position: relative;
+			  top: 0;
+			  right: 0;
+			  bottom: 0;
+			  left: 0;
+			  margin: auto;
+			}
+
+			#tout:first-child>div>div {
+			  width: 90px;
+			  height: 90px;
+			  border: 5px solid #bbb;
+			  border-radius: 50%;
+			  margin: auto;
+			  overflow: hidden;
+			}
+
+			#tout:first-child div div div {
+			  width: 110px;
+			  height: 110px;
+			  margin: auto;
+			  top: 360px;
+			  background-color: #999;
+			  border-radius: 0%;
+			  border: none;
+			  animation-name: anim, color;
+			  animation-duration: 5s;
+			  animation-timing-function:ease;
+			  animation-iteration-count:infinite;
+			  animation-direction: alternate;
+			}
+
+			@keyframes anim{
+
+			  100% { top:0 }
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div id="container" style="width: 100vw; height: 80vh;">
+			<div id="tout">
+			  <div>
+			    <div>
+			      <div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+		</div>
+		<div id="info">
+			Lorem ipsum dolor sit amet, consectetur
+			<a href="./hire_me.html">hire me</a>
+		</div>
+
+		<script src="./js/three.min.js"></script>
+		<script src="./js/three/examples/js/loaders/PLYLoader.js"></script>
+		<!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
+		<!-- <script src="./js/three/examples/js/controls/TrackballControls.js"></script> -->
+		<script src="./js/three/examples/js/controls/OrbitControls.js"></script>
+		<script>
+			var model_url = "./models/headp_no_normal.ply"
+			var camera, controls, scene, renderer;
+			var container = document.getElementById("container");
+			init();
+			animate();
+			function init() {
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( container.offsetWidth, container.offsetHeight );
+				container.appendChild( renderer.domElement );
+
+				scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0x000000 );
+				camera = new THREE.PerspectiveCamera( 15, container.offsetWidth / container.offsetHeight, 0.01, 40 );
+				camera.position.x = 1;
+				// camera.position.z = 0; // - 2
+				// camera.up.set( 0, 0, 1 );
+
+				// controls
+				controls = new THREE.OrbitControls(camera, container);
+				controls.dampingFactor = 0.25;
+				controls.screenSpacePanning = true;
+				controls.minDistance = 2;
+				controls.maxDistance = 2;
+				controls.maxPolarAngle = Math.PI / 2;
+				controls.minPolarAngle = Math.PI / 2; // radians
+				controls.minAzimuthAngle = - Math.PI / 6; // radians
+				controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
+				controls.rotateSpeed = 0.7;
+				controls.enablePan = false;
+
+				scene.add( camera );
+
+
+				var loader = new THREE.PLYLoader();
+				var tout = document.getElementById("tout");
+				function onProgress( xhr ) {
+
+
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( 'model ' + Math.round( percentComplete, 2 ) + '% downloaded' );
+					}
+				}
+
+				loader.load( model_url, function ( geometry ) {
+					// var color = [];
+					// tout.style.display = "none";
+					// tout.style.position = "absolute";
+					tout.parentNode.removeChild(tout);
+					var material = new THREE.PointsMaterial( { size: 0.005 } );
+					// geometry.addAttribute( 'color', []);
+					material.color.setHex( Math.random() * 0xffffff );
+					// console.log("geometry, ", geometry);
+					// build mesh
+					var mesh = new THREE.Points( geometry, material );
+					mesh.name = "headp.ply";
+					// console.log("mesh, ", mesh);
+					scene.add( mesh );
+
+					var center = mesh.geometry.boundingSphere.center;
+					center.x -= 0.03;
+					center.y += 0.03;
+					controls.target.set( center.x, center.y, center.z );
+					controls.update();
+				}, onProgress );
+
+				window.addEventListener( 'resize', onWindowResize, false );
+				window.addEventListener( 'keypress', keyboard );
+			}
+			function onWindowResize() {
+				camera.aspect = container.offsetWidth / container.offsetHeight;
+				camera.updateProjectionMatrix();
+				renderer.setSize( container.offsetWidth, container.offsetHeight );
+				// controls.handleResize();
+			}
+			function keyboard( ev ) {
+				var points = scene.getObjectByName( 'headp.ply' );
+				switch ( ev.key || String.fromCharCode( ev.keyCode || ev.charCode ) ) {
+					case '+':
+						points.material.size *= 1.2;
+						points.material.needsUpdate = true;
+						break;
+					case '-':
+						points.material.size /= 1.2;
+						points.material.needsUpdate = true;
+						break;
+					case 'c':
+						points.material.color.setHex( Math.random() * 0xffffff );
+						points.material.needsUpdate = true;
+						break;
+				}
+			}
+			function animate() {
+				requestAnimationFrame( animate );
+				controls.update();
+				renderer.render( scene, camera );
+			}
+		</script>
+
+	</body>
+</html>

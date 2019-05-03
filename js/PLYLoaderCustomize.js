@@ -1,4 +1,4 @@
-/**
+/**??
  * @author Wei Meng / http://about.me/menway
  *
  * Description: A THREE loader for PLY ASCII files (known as the Polygon
@@ -93,7 +93,7 @@ THREE.PLYLoader.prototype = {
 			var currentElement;
 			var lineType, lineValues;
 
-			function make_ply_element_property( propertValues, propertyNameMapping ) {
+			function make_ply_element_property( propertValues ) {
 
 				var property = { type: propertValues[ 0 ] };
 
@@ -109,11 +109,6 @@ THREE.PLYLoader.prototype = {
 
 				}
 
-				if ( property.name in propertyNameMapping ) {
-
-					property.name = propertyNameMapping[ property.name ];
-
-				}
 
 				return property;
 
@@ -162,7 +157,7 @@ THREE.PLYLoader.prototype = {
 
 					case 'property':
 
-						currentElement.properties.push( make_ply_element_property( lineValues, scope.propertyNameMapping ) );
+						currentElement.properties.push( make_ply_element_property( lineValues ) );
 
 						break;
 
