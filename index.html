@@ -260,14 +260,19 @@
 							controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
 							controls.rotateSpeed = 0.7;
 							controls.enablePan = false;
+							controls.autoRotate = true;
+							controls.autoRotateSpeed = 2.0;
 
 						}
 
 						// console.log("once");
 					}
 				}
-				// console.log(camera.position);
+				console.log(camera.position);
 				if (animationComplete) {
+					if (camera.position.x < 1.85) {
+						controls.autoRotate = false;
+					}
 					controls.update();
 				}
 
