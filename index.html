@@ -66,6 +66,7 @@
 	</head>
 
 	<body>
+
 		<div id="container" style="width: 100vw; height: 80vh;">
 			<div id="tout">
 			  <div>
@@ -75,6 +76,10 @@
 			    </div>
 			  </div>
 			</div>
+		</div>
+		<div id="info">
+			Lorem ipsum dolor sit amet, consectetur
+			<a href="./hire_me.html">hire me</a>
 		</div>
 
 		<script src="./js/three.js"></script>
@@ -140,7 +145,7 @@
 					// build mesh
 					var mesh = new THREE.Points( geometry, material );
 					mesh.name = "headp.ply";
-					console.log("mesh, ", mesh);
+					// console.log("mesh, ", mesh);
 					scene.add( mesh );
 
 					var center = mesh.geometry.boundingSphere.center;
