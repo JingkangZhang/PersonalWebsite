@@ -66,7 +66,7 @@
 	</head>
 
 	<body>
-		<div id="container" style="width: 400px; height: 400px;">
+		<div id="container" style="width: 100vw; height: 100vh;">
 			<div id="tout">
 			  <div>
 			    <div>
@@ -80,7 +80,7 @@
 		<script src="./js/three.js"></script>
 		<script src="./js/three/examples/js/loaders/PLYLoader.js"></script>
 		<!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
-		<script src="./js/three/examples/js/controls/TrackballControls.js"></script>
+		<!-- <script src="./js/three/examples/js/controls/TrackballControls.js"></script> -->
 		<script src="./js/three/examples/js/controls/OrbitControls.js"></script>
 		<script>
 			var camera, controls, scene, renderer;
@@ -157,7 +157,7 @@
 				camera.aspect = container.offsetWidth / container.offsetHeight;
 				camera.updateProjectionMatrix();
 				renderer.setSize( container.offsetWidth, container.offsetHeight );
-				controls.handleResize();
+				// controls.handleResize();
 			}
 			function keyboard( ev ) {
 				var points = scene.getObjectByName( 'headp.ply' );
