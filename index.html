@@ -15,14 +15,67 @@
 				text-align: center;
 			}
 
+			#tout {
+			  position: relative;
+			  top: 50%;
+			  transform: translateY(-50%);
+			}
+			#tout:first-child div {
+			  display: block;
+			  width: 100px;
+			  height: 100px;
+			  border: 3px solid #bbb;
+			  border-radius: 50%;
+			  position: relative;
+			  top: 0;
+			  right: 0;
+			  bottom: 0;
+			  left: 0;
+			  margin: auto;
+			}
+
+			#tout:first-child>div>div {
+			  width: 90px;
+			  height: 90px;
+			  border: 5px solid #bbb;
+			  border-radius: 50%;
+			  margin: auto;
+			  overflow: hidden;
+			}
+
+			#tout:first-child div div div {
+			  width: 110px;
+			  height: 110px;
+			  margin: auto;
+			  top: 360px;
+			  background-color: #999;
+			  border-radius: 0%;
+			  border: none;
+			  animation-name: anim, color;
+			  animation-duration: 5s;
+			  animation-timing-function:ease;
+			  animation-iteration-count:infinite;
+			  animation-direction: alternate;
+			}
+
+			@keyframes anim{
+
+			  100% { top:0 }
+			}
 		</style>
 	</head>
 
 	<body>
-		<div id="info">
-			<a href="http://threejs.org" target="_blank" rel="noopener">three.js</a> - orbit controls example
+		<div id="container" style="width: 800px; height: 800px;">
+			<div id="tout">
+			  <div>
+			    <div>
+			      <div>
+			      </div>
+			    </div>
+			  </div>
+			</div>
 		</div>
-		<div id="container" style="width: 800px; height: 800px;"> </div>
 
 		<script src="./js/three.js"></script>
 		<script src="./js/three/examples/js/loaders/PLYLoader.js"></script>
@@ -59,14 +112,26 @@
 				controls.minAzimuthAngle = - Math.PI / 6; // radians
 				controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
 				controls.rotateSpeed = 0.7;
+				controls.enablePan = false;
 
 				scene.add( camera );
 
 
 				var loader = new THREE.PLYLoader();
+				var tout = document.getElementById("tout");
+				function onProgress( xhr ) {
+
+
+					if ( xhr.lengthComputable ) {
+						var percentComplete = xhr.loaded / xhr.total * 100;
+						console.log( 'model ' + Math.round( percentComplete, 2 ) + '% downloaded' );
+					}
+				}
+
 				loader.load( 'headp.ply', function ( geometry ) {
 					// var color = [];
-
+					// tout.style.display = "none";
+					tout.style.position = "absolute";
 					var material = new THREE.PointsMaterial( { size: 0.005 } );
 					// geometry.addAttribute( 'color', []);
 					material.color.setHex( Math.random() * 0xffffff );
@@ -82,7 +147,7 @@
 					center.y += 0.03;
 					controls.target.set( center.x, center.y, center.z );
 					controls.update();
-				} );
+				}, onProgress );
 
 				window.addEventListener( 'resize', onWindowResize, false );
 				window.addEventListener( 'keypress', keyboard );
