@@ -86,7 +86,7 @@
 			</div>
 		</div>
 		<div id="info">
-			<a href="./anim.html"> Animation </a>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 			Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
@@ -137,6 +137,7 @@
 		<script src="./js/three/examples/js/controls/OrbitControls.js"></script>
 		<script>
 			var camera, controls, scene, renderer;
+			var center;
 			var model_url = "./models/headp_no_normal.ply.zip";
 			var unzipped_name = "headp_no_normal.ply";
 			var container = document.getElementById("container");
@@ -152,25 +153,13 @@
 					scene = new THREE.Scene();
 					scene.background = new THREE.Color( 0x000000 );
 					camera = new THREE.PerspectiveCamera( 15, container.offsetWidth / container.offsetHeight, 0.01, 40 );
-					camera.position.x = 1;
-					// camera.position.z = 0; // - 2
-					// camera.up.set( 0, 0, 1 );
-				}
-				// controls
-				{
-					controls = new THREE.OrbitControls(camera, container);
-					controls.dampingFactor = 0.25;
-					controls.screenSpacePanning = true;
-					controls.minDistance = 2;
-					controls.maxDistance = 2;
-					controls.maxPolarAngle = Math.PI / 2;
-					controls.minPolarAngle = Math.PI / 2; // radians
-					controls.minAzimuthAngle = - Math.PI / 6; // radians
-					controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
-					controls.rotateSpeed = 0.7;
-					controls.enablePan = false;
+					camera.position.x = 1.5; // x and z determines face direction
+					camera.position.z = 0; // - 2
+					camera.position.y = 1; // y determines angle from above
 					scene.add( camera );
+					// camera.up.set( -1, 0, 0 );
 				}
+
 
 				// loading
 				{
@@ -197,11 +186,12 @@
 							// console.log("mesh, ", mesh);
 							scene.add( mesh );
 
-							var center = mesh.geometry.boundingSphere.center;
+							center = mesh.geometry.boundingSphere.center;
+							camera.lookAt(center);
 							center.x -= 0.03;
 							center.y += 0;
-							controls.target.set( center.x, center.y, center.z );
-							controls.update();
+							// controls.target.set( center.x, center.y, center.z );
+							// controls.update();
 					};
 
 					new Promise( function ( resolve, reject ) {
@@ -219,9 +209,6 @@
 						// console.log(text);
 						onLoad( THREE.PLYLoader.prototype.parse( text ) );
 					});
-
-
-
 				}
 
 				window.addEventListener( 'resize', onWindowResize, false );
@@ -250,9 +237,40 @@
 						break;
 				}
 			}
+			var animationComplete = false;
 			function animate() {
 				requestAnimationFrame( animate );
-				controls.update();
+				if (center && (!animationComplete)) {
+					if (camera.position.y > 0.001) {
+						camera.position.y -= 0.01;
+						camera.position.x += 0.005;
+						camera.lookAt(center);
+					} else {
+						animationComplete = true;
+						// controls
+						{
+							controls = new THREE.OrbitControls(camera, container);
+							controls.dampingFactor = 0.25;
+							controls.screenSpacePanning = true;
+							controls.minDistance = 2;
+							controls.maxDistance = 2;
+							controls.maxPolarAngle = Math.PI / 2;
+							controls.minPolarAngle = Math.PI / 2; // radians
+							controls.minAzimuthAngle = - Math.PI / 6; // radians
+							controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
+							controls.rotateSpeed = 0.7;
+							controls.enablePan = false;
+
+						}
+
+						// console.log("once");
+					}
+				}
+				// console.log(camera.position);
+				if (animationComplete) {
+					controls.update();
+				}
+
 				renderer.render( scene, camera );
 			}
 
