@@ -142,7 +142,7 @@
 			var unzipped_name = "headp_no_normal.ply";
 			var container = document.getElementById("container");
 			init();
-			animate();
+
 			function init() {
 				// renderer and camera
 				{
@@ -192,6 +192,7 @@
 							center.y += 0;
 							// controls.target.set( center.x, center.y, center.z );
 							// controls.update();
+							animate();
 					};
 
 					new Promise( function ( resolve, reject ) {
@@ -223,7 +224,15 @@
 			function getRandom(min, max) {
 			    return Math.random() * (max - min) + min;
 			}
-
+			function changeColor(mode, hue) { //mode = 1 is dark mode, mode = 2 is bright
+				var points = scene.getObjectByName( 'headp.ply' );
+				var randHue = hue ? hue : getRandom(0, 1);
+				var randSat = getRandom(0.4, 0.8);
+				var randLight = mode == 1 ? 0.1 : getRandom(0.5, 0.8);
+				points.material.color.setHSL(randHue, randSat, randLight );
+				console.log(randHue, randSat, randLight);
+				points.material.needsUpdate = true;
+			}
 			function keyboard( ev ) {
 				var points = scene.getObjectByName( 'headp.ply' );
 				switch ( ev.key || String.fromCharCode( ev.keyCode || ev.charCode ) ) {
@@ -236,19 +245,22 @@
 						points.material.needsUpdate = true;
 						break;
 					case 'c':
-						var randHue = getRandom(0, 1);
-						var randSat = getRandom(0.4, 0.5);
-						var randLight = getRandom(0.5, 0.8);
-						points.material.color.setHSL(randHue, randSat, randLight );
-						console.log(randHue, randSat, randLight);
-
-						points.material.needsUpdate = true;
+						changeColor(2);
 						break;
 				}
 			}
 			var animationComplete = false;
-			function animate() {
+			var last = 0;
+			var changeTime = getRandom(20, 30);
+			function animate(now) {
 				requestAnimationFrame( animate );
+				if (!last || now - last >= changeTime*1000) {
+			        last = now;
+			        changeColor(2);
+					changeTime = getRandom(20, 30);
+			    } else if (now - last >= changeTime*1000 - 0.5*1000) {
+					changeColor(1);
+				}
 				if (center && (!animationComplete)) {
 					if (camera.position.y > 0.001) {
 						camera.position.y -= 0.01;
