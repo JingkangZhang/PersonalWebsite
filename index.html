@@ -188,9 +188,22 @@
 			function getRandom(min, max) {
 			    return Math.random() * (max - min) + min;
 			}
-			function changeColor(mode, hue) { //mode = 1 is dark mode, mode = 2 is bright
+			var prevHue = -1;
+			function changeColor(mode, hue) { //mode = 1 is flashing dark mode, mode = 2 is bright
 				var points = scene.getObjectByName( 'headp.ply' );
 				var randHue = hue ? hue : getRandom(0, 1);
+				if (mode == 2) {
+					var hueDistance = Math.abs(prevHue - randHue);
+					hueDistance = Math.min(hueDistance, 1 - hueDistance);
+					while (prevHue !== -1 && hueDistance < 0.1) {
+						randHue = getRandom(0, 1);
+						hueDistance = Math.abs(prevHue - randHue);
+						hueDistance = Math.min(hueDistance, 1 - hueDistance);
+						console.log("in loop");
+					}
+					console.log(prevHue);
+					prevHue = randHue;
+				}
 				var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
 				var randLight = mode == 1 ? 0.1 : getRandom(0.5, 0.8);
 				points.material.color.setHSL(randHue, randSat, randLight );
@@ -215,13 +228,13 @@
 			}
 			var animationComplete = false;
 			var last = 0;
-			var changeTime = getRandom(20, 30);
+			var changeTime = 15;
 			function animate(now) {
 				requestAnimationFrame( animate );
 				if (!last || now - last >= changeTime*1000) {
 			        last = now;
 			        changeColor(2);
-					changeTime = getRandom(20, 30);
+					// changeTime = getRandom(2, 3);
 			    } else if (now - last >= changeTime*1000 - 0.5*1000) {
 					changeColor(1);
 				}
