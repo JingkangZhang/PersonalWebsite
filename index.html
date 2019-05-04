@@ -191,7 +191,7 @@
 			function changeColor(mode, hue) { //mode = 1 is dark mode, mode = 2 is bright
 				var points = scene.getObjectByName( 'headp.ply' );
 				var randHue = hue ? hue : getRandom(0, 1);
-				var randSat = getRandom(0.4, 0.8);
+				var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
 				var randLight = mode == 1 ? 0.1 : getRandom(0.5, 0.8);
 				points.material.color.setHSL(randHue, randSat, randLight );
 				// console.log(randHue, randSat, randLight);
@@ -222,7 +222,7 @@
 			        last = now;
 			        changeColor(2);
 					changeTime = getRandom(20, 30);
-			    } else if (now - last >= changeTime*1000 - 0.8*1000) {
+			    } else if (now - last >= changeTime*1000 - 0.5*1000) {
 					changeColor(1);
 				}
 				if (center && (!animationComplete)) {
