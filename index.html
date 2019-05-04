@@ -194,9 +194,12 @@
 			    return Math.random() * (max - min) + min;
 			}
 			var prevHue = -1;
-			function changeColor(mode, hue) { //mode = 1 is flashing dark mode, mode = 2 is bright
+			// var flashingHue = 0;
+			function changeColor(mode) { //mode = 1 is flashing dark mode, mode = 2 is bright
 				var points = scene.getObjectByName( 'headp.ply' );
-				var randHue = hue ? hue : getRandom(0, 1);
+				// var randHue = mode == 1 ? (flashingHue + 0.1) % 1 : getRandom(0, 1);
+				var randHur = getRandom(0, 1);
+				// flashingHue = randHue;
 				if (mode == 2) {
 					var hueDistance = Math.abs(prevHue - randHue);
 					hueDistance = Math.min(hueDistance, 1 - hueDistance);
@@ -204,11 +207,12 @@
 						randHue = getRandom(0, 1);
 						hueDistance = Math.abs(prevHue - randHue);
 						hueDistance = Math.min(hueDistance, 1 - hueDistance);
-						console.log("in loop");
+						// console.log("in loop");
 					}
-					console.log(prevHue);
+					// console.log(prevHue);
 					prevHue = randHue;
 				}
+				// console.log(randHue);
 				var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
 				var randLight = mode == 1 ? 0.1 : getRandom(0.5, 0.8);
 				points.material.color.setHSL(randHue, randSat, randLight );
