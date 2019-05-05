@@ -107,6 +107,7 @@
 		<script>
 			var camera, controls, scene, renderer;
 			var center;
+			var points;
 			var model_url = "./models/headp_no_normal.ply.zip";
 			var unzipped_name = "headp_no_normal.ply";
 			var container = document.getElementById("container");
@@ -148,6 +149,7 @@
 							var material = new THREE.PointsMaterial( { size: 0.0045 } );
 							// geometry.addAttribute( 'color', []);
 							// material.color.setHex(0xAAAAAA);
+							// Below idea is thanks to @marquizzo
 							material.blending = THREE.AdditiveBlending;
 							// console.log("geometry, ", geometry);
 							// build mesh
@@ -160,6 +162,7 @@
 							camera.lookAt(center);
 							center.x -= 0.03;
 							center.y += 0;
+							points = mesh;
 							// controls.target.set( center.x, center.y, center.z );
 							// controls.update();
 							animate();
@@ -194,12 +197,16 @@
 			function getRandom(min, max) {
 			    return Math.random() * (max - min) + min;
 			}
-			var prevHue = -1;
+			var prevHue = getRandom(0, 1);
+			var prevSat = getRandom(0.4, 0.8);
+			var prevLight = getRandom(0.6, 0.8);
 			// var flashingHue = 0;
-			function changeColor(mode) { //mode = 1 is flashing dark mode, mode = 2 is bright
-				var points = scene.getObjectByName( 'headp.ply' );
+			function changeColor(mode) { //mode = 1 is flashing dark mode, mode = 2 is brighter than normal, 3 is normal
+
 				// var randHue = mode == 1 ? (flashingHue + 0.1) % 1 : getRandom(0, 1);
 				var randHue = getRandom(0, 1);
+				var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
+				var randLight = mode == 1 ? 0.1 : getRandom(0.6, 0.8);
 				// flashingHue = randHue;
 				if (mode == 2) {
 					var hueDistance = Math.abs(prevHue - randHue);
@@ -212,16 +219,20 @@
 					}
 					// console.log(prevHue);
 					prevHue = randHue;
+					prevSat = randSat;
+					prevLight = randLight;
+				} else if (mode == 3) {
+					randHue = prevHue;
+					randSat = prevSat;
+					randLight = prevLight;
 				}
 				// console.log(randHue);
-				var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
-				var randLight = mode == 1 ? 0.1 : getRandom(0.5, 0.8);
+
 				points.material.color.setHSL(randHue, randSat, randLight );
 				// console.log(randHue, randSat, randLight);
 				points.material.needsUpdate = true;
 			}
 			function keyboard( ev ) {
-				var points = scene.getObjectByName( 'headp.ply' );
 				switch ( ev.key || String.fromCharCode( ev.keyCode || ev.charCode ) ) {
 					case '+':
 						points.material.size *= 1.2;
@@ -239,13 +250,31 @@
 			var animationComplete = false;
 			var last = 0;
 			var changeTime = 15;
+			var flashTime = 0.5;
+			var flashBrightStarted = false;
 			function animate(now) {
 				requestAnimationFrame( animate );
-				if (!last || now - last >= changeTime*1000) {
+				if (!last || now - last >= changeTime*1000) { // the normal display interval
 			        last = now;
-			        changeColor(2);
+			        changeColor(3);
+					if (flashBrightStarted) {
+						points.material.size /= 1.5;
+						flashBrightStarted = false;
+					}
 					// changeTime = getRandom(2, 3);
-			    } else if (now - last >= changeTime*1000 - 0.5*1000) {
+			    } else if (now - last >= changeTime*1000 - (flashTime*0.2)*1000) { // the flash bright interval
+					if (!flashBrightStarted) {
+						changeColor(2);
+					} else {
+						changeColor(3);
+					}
+
+					if (!flashBrightStarted) {
+						points.material.size *= 1.5;
+						flashBrightStarted = true;
+					}
+
+				} else if (now - last >= changeTime*1000 - flashTime*1000) { // the flashing dark (flashing color) interval
 					changeColor(1);
 				}
 				if (center && (!animationComplete)) {
