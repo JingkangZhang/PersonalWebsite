@@ -249,7 +249,7 @@
 			}
 			var animationComplete = false;
 			var last = 0;
-			var changeTime = 15;
+			var changeTime = 10;
 			var flashTime = 0.5;
 			var flashBrightStarted = false;
 			function animate(now) {
@@ -258,7 +258,7 @@
 			        last = now;
 			        changeColor(3);
 					if (flashBrightStarted) {
-						points.material.size /= 1.5;
+						points.material.size /= 1.8;
 						flashBrightStarted = false;
 					}
 					// changeTime = getRandom(2, 3);
@@ -270,7 +270,7 @@
 					}
 
 					if (!flashBrightStarted) {
-						points.material.size *= 1.5;
+						points.material.size *= 1.8;
 						flashBrightStarted = true;
 					}
 
