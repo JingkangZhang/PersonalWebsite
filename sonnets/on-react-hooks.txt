@@ -15,10 +15,10 @@ Shouldst thou this day manage the transition,
 Morrow thou shalt save thyself frustrations.
 
 
-In modern English:
+Paraphrasing and explanations:
 You should not use classes any more;
 Because although 'class' as syntax sugar can look nice,
-It only creates functions in JavaScript, nothing new,
+It only creates functions(objects) in JavaScript, nothing new,
 And poses barriers to new learners.
 Don't fear that the transition to Hooks will turn out bad,
 Because you can use the new State hooks,
