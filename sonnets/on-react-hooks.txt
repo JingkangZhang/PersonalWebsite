@@ -1,5 +1,4 @@
 On React Hooks
-
 From thine unblessed classes thou shalt depart:
 For syntax sugar doth thine eyes sweeten,
 Yet they art but functions cold to thy heart,
@@ -14,3 +13,20 @@ Effect Hooks, all in one, do sweetly mask.
 Or thou mayst complain 'bout old code amount:
 Shouldst thou this day manage the transition,
 Morrow thou shalt save thyself frustrations.
+
+
+In modern English:
+You should not use classes any more;
+Because although 'class' as syntax sugar can look nice,
+It only creates functions in JavaScript, nothing new,
+And poses barriers to new learners.
+Don't fear that the transition to Hooks will turn out bad,
+Because you can use the new State hooks,
+And your component will still be stateful.
+If you find more excuse about not using it, you are just hating.
+How to send my requests? You may ask.
+We used to use the function componentDidMount(),
+But now we can use the integrated Effect hooks.
+Or you might complain about the amount of old code (written in classes),
+But if you make the transition today (to Hooks),
+Tomorrow you will save yourself frustrations.
