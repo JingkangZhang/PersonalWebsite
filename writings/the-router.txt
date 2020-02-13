@@ -1,0 +1,16 @@
+The Router
+
+When various packets do headlong delve in,
+To the immense network of links and nodes,
+With their companions sweetly do blend in,
+Each's secret each in its payload enfolds.
+"O diligent Sir Router" quoth packets,
+"Wherefore detainst thou us here, us thence bound?"
+"Congestions, disconnections, bad circuits,
+Which all can me or thy mission confound.
+I shall deliver with my effort best,
+As I each of thou do send to next hops;
+And if I be with my fit fortune blest,
+Thou shalt arrive, nor be thy fellows dropped."
+Thus answered Router our friend warm and keen,
+Who at next moment crashed, alack, unseen.
