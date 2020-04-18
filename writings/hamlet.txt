@@ -119,3 +119,21 @@ entrails
 
 blench:
 make a sudden flinching movement out of fear or pain
+
+
+Act 3
+
+forward:
+eager
+
+sounded:
+probed
+
+contumely:
+scornful abuse
+
+orison:
+prayer
+
+bourn:
+border
