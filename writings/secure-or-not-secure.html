@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>Jingkang Zhang Writing</title>
+  <LINK href="mdstyles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Secure Or Not Secure <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></h1>
+<p>Secure, or not secure, that is the question:<br>
+Whether ’tis safer on the stack<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> to store<br>
+The secret passwords of our precious users,<br>
+Or to solidify our memory<br>
+And with canaries<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup> harden it. Tis safe?<br>
+No more; or by a DEP<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup> to say we end<br>
+The heart-ache and the thousand natural bugs<br>
+That C is heir to: ‘tis <sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup> a consummation<br>
+Devoutly to be wish’d. To code, to run;<br>
+To run, perchance to crash—ay, there’s the rub:<br>
+For in that run of code what bugs may come,<br>
+When we have hardened up this legacy,<br>
+Must give us pause—there’s the chance that<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup><br>
+Some other bugs bring down our tested app.<br>
+For who would bear the collisions of hashes<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup>,<br>
+The brute-forced passwords and seq numbers<sup class="footnote-ref"><a href="#fn8" id="fnref8">[8]</a></sup>, fie,<br>
+RESET’d connections by th'man in the middle<sup class="footnote-ref"><a href="#fn9" id="fnref9">[9]</a></sup>,<br>
+The bypass’d firewalls, and the so little<br>
+Amount of money that D-DOS<sup class="footnote-ref"><a href="#fn10" id="fnref10">[10]</a></sup> can cost,<br>
+When we ourself might our quietus make<br>
+Without concerns for a well-secure’d system?<br>
+To grunt and sweat under a weary life,<br>
+But for the dread of some improbable<br>
+Attacks, from whose 0-days<sup class="footnote-ref"><a href="#fn11" id="fnref11">[11]</a></sup> no one has suffer’d?<br>
+Thus conscience does make cowards of us all,<br>
+And thus the speed of our development<br>
+Is slowed down with the pale cast of thought<sup class="footnote-ref"><a href="#fn12" id="fnref12">[12]</a></sup>,<br>
+And enterprises of great pitch and moment<br>
+With this regard their currents turn awry<br>
+And lose the name of action. —Soft you now,<br>
+Fair EvanBot<sup class="footnote-ref"><a href="#fn13" id="fnref13">[13]</a></sup>!— In thy inspections be<br>
+All my bugs fixed.</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1"  class="footnote-item"><p>Adapted from Hamlet's <a href="https://www.poetryfoundation.org/poems/56965/speech-to-be-or-not-to-be-that-is-the-question">To Be Or Not To Be</a> <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2"  class="footnote-item"><p>A <a href="https://en.wikipedia.org/wiki/Stack_(abstract_data_type)#Security">stack</a> <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3"  class="footnote-item"><p><a href="https://en.wikipedia.org/wiki/Stack_buffer_overflow#Stack_canaries">Stack canaries</a> <a href="#fnref3" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn4"  class="footnote-item"><p><a href="https://docs.microsoft.com/en-us/windows/win32/memory/data-execution-prevention">DEP</a> <a href="#fnref4" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn5"  class="footnote-item"><p>the &quot;da DUM&quot; iambic foot is split among two sentences, bad <a href="#fnref5" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn6"  class="footnote-item"><p>not pentameter: only has 8 syllables <a href="#fnref6" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn7"  class="footnote-item"><p><a href="https://en.wikipedia.org/wiki/Collision_attack">hash collision</a> <a href="#fnref7" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn8"  class="footnote-item"><p>tcp attack involves <a href="https://security.stackexchange.com/questions/133594/tcp-off-path-attack-cve-2016-5696">guessing the sequnce number</a> <a href="#fnref8" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn9"  class="footnote-item"><p><a href="https://en.wikipedia.org/wiki/TCP_reset_attack">tcp reset attack</a> (doesn't have to be <a href="https://en.wikipedia.org/wiki/Man-in-the-middle_attack">MITM</a>) <a href="#fnref9" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn10"  class="footnote-item"><p><a href="https://en.wikipedia.org/wiki/Denial-of-service_attack">DDOS</a> <a href="#fnref10" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn11"  class="footnote-item"><p><a href="https://en.wikipedia.org/wiki/Zero-day_(computing)">zero day</a> <a href="#fnref11" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn12"  class="footnote-item"><p>&quot;pale cast of thought&quot; is properly used in the original text, but doesn't quite fit here, because it doesn't &quot;slow&quot; anything down. <a href="#fnref12" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn13"  class="footnote-item"><p>EvanBot: mascot for <a href="https://sp20.cs161.org/">Berkeley CS161 (Computer Security) during Sp2020</a> <a href="#fnref13" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+</body>
+</html>
