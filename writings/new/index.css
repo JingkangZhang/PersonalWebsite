@@ -12,6 +12,8 @@ body {
     /* height: 800px; */
     box-sizing: border-box;
     background-color: blanchedalmond;
+    position: relative;
+    z-index: 10;
 }
 
 #menu {

@@ -48,7 +48,7 @@
 
     <script>
         SCROLL_SCALE = 2;
-        TRIGGER_TURN_RED_TOP = 0 * SCROLL_SCALE;
+        TRIGGER_TURN_RED_TOP = 1;
         TRIGGER_CHANGE_QUOTE_TOP = 200 * SCROLL_SCALE;
         CHANGE_QUOTE_END = 300 * SCROLL_SCALE;
         TRIGGER_INCAR_TEXT_TOP = 350 * SCROLL_SCALE;
@@ -68,7 +68,9 @@
         })
             // animate color and top border in relation to scroll position
             .setTween("#sea-img", { opacity: 0 }) // the tween durtion can be omitted and defaults to 1
-            .setPin("#opening-pin")
+            .setPin("#opening-pin", {
+                pushFollowers: true
+            })
             .addIndicators({ name: "1 " }) // add indicators (requires plugin)
             .addTo(controller);
 
