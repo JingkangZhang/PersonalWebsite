@@ -26,8 +26,15 @@
 <body>
     <div id="opening">
         <div id="triggerTurnRed" class="trigger"></div>
+        <div id="triggerChangeQuote" class="trigger"></div>
+        <div id="triggerIncarText" class="trigger"></div>
+
+
         <div id="opening-pin">
-            <div id="quote">Will all great Neptune's ocean wash this blood / Clean from my hand? </div>
+            <div class="quote" id="quote-wash">Will all great Neptune's ocean wash this blood clean from my hand? </div>
+            <div class="quote" id="quote-incarnadine">No, these my hands will rather the multitudinous seas
+                <span id="text-incarnadine">incarnadine</span>.
+            </div>
             <img id="sea-img" src="./seas.jpg" />
             <img id="incarnadine-img" src="./incarnadine.jpg" />
         </div>
@@ -35,14 +42,28 @@
     </div>
 
     <div id="menu">
-        <img id="menu-img-strip" src="./incarnadine-strip1.jpg" />
+        <!-- <img id="menu-img-strip" src="./incarnadine-strip1.jpg" /> -->
     </div>
     <div id="view-modal"></div>
 
     <script>
+        SCROLL_SCALE = 2;
+        TRIGGER_TURN_RED_TOP = 0 * SCROLL_SCALE;
+        TRIGGER_CHANGE_QUOTE_TOP = 200 * SCROLL_SCALE;
+        CHANGE_QUOTE_END = 300 * SCROLL_SCALE;
+        TRIGGER_INCAR_TEXT_TOP = 350 * SCROLL_SCALE;
+        // INCAR_TEXT_END = 450 * SCROLL_SCALE;
+        TURN_RED_END = 450 * SCROLL_SCALE;
+
+        document.getElementById("triggerTurnRed").style.top = TRIGGER_TURN_RED_TOP + "px";
+        document.getElementById("triggerChangeQuote").style.top = TRIGGER_CHANGE_QUOTE_TOP + "px";
+        document.getElementById("triggerIncarText").style.top = TRIGGER_INCAR_TEXT_TOP + "px";
+
+
+        // Set up the scene for incarnadining
         let sceneTurnRed = new ScrollMagic.Scene({
             triggerElement: "#triggerTurnRed",
-            duration: 400,
+            duration: TURN_RED_END - TRIGGER_TURN_RED_TOP,
             triggerHook: 0
         })
             // animate color and top border in relation to scroll position
@@ -51,7 +72,31 @@
             .addIndicators({ name: "1 " }) // add indicators (requires plugin)
             .addTo(controller);
 
+        // Set up the scene for changing text
+        let changeQuoteTimeline = new TimelineMax();
+        changeQuoteTimeline
+            .add(TweenMax.to("#quote-wash", 1, { opacity: 0 }))
+            .add(TweenMax.to("#quote-incarnadine", 1, { opacity: 1 }));
+        let sceneChangeQuote = new ScrollMagic.Scene({
+            triggerElement: "#triggerChangeQuote",
+            duration: CHANGE_QUOTE_END - TRIGGER_CHANGE_QUOTE_TOP,
+            triggerHook: 0
+        })
+            .setTween(changeQuoteTimeline)
+            // .setTween("#quote-wash", 1, { opacity: 0 })
+            // .setTween("#quote-incarnadine", 1, { opacity: 1 })
+            .addIndicators({ name: "2 " }) // add indicators (requires plugin)
+            .addTo(controller);
 
+        // Set up the scene for incarnadine the word
+        let sceneIncarText = new ScrollMagic.Scene({
+            triggerElement: "#triggerIncarText",
+            // duration: INCAR_TEXT_END - TRIGGER_INCAR_TEXT_TOP,
+            triggerHook: 0
+        })
+            .setClassToggle("#text-incarnadine", "text-incarnadine-red")
+            .addIndicators({ name: "3 " }) // add indicators (requires plugin)
+            .addTo(controller);
     </script>
 </body>
 
