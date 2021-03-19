@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Jingkang Zhang Writings</title>
+    <link href="./index.css" rel="stylesheet" />
+
+    <script src="./scrollmagic/ScrollMagic.min.js"></script>
+    <script src="./scrollmagic/gsap.min.js"></script>
+    <script src="./scrollmagic/animation.gsap.min.js"></script>
+    <script src="./scrollmagic/debug.addIndicators.min.js"></script>
+
+    <!-- <script  src="./scrollmagic/ScrollMagic.js"></script>
+    <script  src="./scrollmagic/gsap-core.js"></script>
+    <script  src="./scrollmagic/animation.gsap.js"></script>
+    <script  src="./scrollmagic/debug.addIndicators.js"></script> -->
+
+    <script>
+        // init controller
+        var controller = new ScrollMagic.Controller();
+    </script>
+</head>
+
+<body>
+    <div id="opening">
+        <div id="triggerTurnRed" class="trigger"></div>
+        <div id="opening-pin">
+            <div id="quote">Will all great Neptune's ocean wash this blood / Clean from my hand? </div>
+            <img id="sea-img" src="./seas.jpg" />
+            <img id="incarnadine-img" src="./incarnadine.jpg" />
+        </div>
+
+    </div>
+
+    <div id="menu">
+        <img id="menu-img-strip" src="./incarnadine-strip1.jpg" />
+    </div>
+    <div id="view-modal"></div>
+
+    <script>
+        let sceneTurnRed = new ScrollMagic.Scene({
+            triggerElement: "#triggerTurnRed",
+            duration: 400,
+            triggerHook: 0
+        })
+            // animate color and top border in relation to scroll position
+            .setTween("#sea-img", { opacity: 0 }) // the tween durtion can be omitted and defaults to 1
+            .setPin("#opening-pin")
+            .addIndicators({ name: "1 " }) // add indicators (requires plugin)
+            .addTo(controller);
+
+
+    </script>
+</body>
+
+</html>

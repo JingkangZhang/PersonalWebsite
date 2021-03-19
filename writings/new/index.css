@@ -1,0 +1,82 @@
+
+body {
+    margin: 0;
+    background-color: #111;
+    width: 100vw;
+    height: 100vh;
+}
+
+#view-modal {
+    /* height: calc(100vh - 80px); */
+    height: 100%;
+    box-sizing: border-box;
+    background-color: blanchedalmond;
+}
+
+#menu {
+    /* height: 50px; */
+    width: 100%;
+    text-align: center;
+}
+
+#menu-img-strip {
+    width: 100%;
+
+    vertical-align: middle;
+}
+
+#opening-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+#opening {
+    width: 100vw;
+    /* overflow: overlay; */
+    position: relative;
+
+}
+
+#opening img {
+    /* position: absolute; */
+    width: 100%;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    /* transition: opacity 0.5s ease-in-out; */
+}
+
+/* #sea-img:hover {
+    opacity: 0;
+} */
+#incarnadine-img {
+    position: absolute;
+}
+
+#quote {
+    position: absolute;
+    font-family: Garamond, 'Times New Roman', Times, serif;
+    color: white;
+    text-shadow: -1px 0 #333, 0 1px #333, 1px 0 #333, 0 -1px #333;
+    font-weight: 550;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-align: center;
+    top: 15%;
+    font-size: 2.5vw;
+    width: 80%;
+    z-index: 3;
+}
+
+#trigger {
+    min-height: 1px;
+    position: absolute;
+}
+#triggerTurnRed {
+    top: 0;
+}
+
+#opening-pin {
+    position: relative;
+}
