@@ -30,6 +30,8 @@ body {
 }
 .menu-show {
     display: block !important;
+    /* opacity: 1 !important; */
+
 }
 
 #menu-img-strip {
