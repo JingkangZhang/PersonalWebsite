@@ -60,31 +60,42 @@ body {
     position: absolute;
 }
 
-.quote {
+#quote-container {
     position: absolute;
+    top: 15%;
+    width: 100%;
+
+}
+
+.quote {
+    /* width: 80%; */
+    left: 50%;
+    text-align: center;
+    transform: translate(-50%, 0);
     font-family: Garamond, 'Times New Roman', Times, serif;
     color: white;
     text-shadow: -2px 0 #333, 0 2px #333, 2px 0 #333, 0 -2px #333;
     font-weight: 550;
-    left: 50%;
-    transform: translate(-50%, 0);
-    text-align: center;
-    top: 15%;
     font-size: 2.5vw;
-    width: 80%;
-    z-index: 3;
+}
+
+#quote-wash {
+    position: relative;
+    z-index: 4;
 }
 
 #quote-incarnadine {
     opacity: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
 }
 
 
 #text-incarnadine {
-    /* transition: background-image 3s ease-in-out; */
     transition: color 0.5s ease-in-out, text-shadow 0.5s ease;
-
-
+    display: inline-block;
 }
 
 .text-incarnadine-red {

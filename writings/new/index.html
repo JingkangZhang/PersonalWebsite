@@ -5,7 +5,10 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>Jingkang Zhang Writings</title>
-    <link href="./index.css" rel="stylesheet" />
+    <link href="./index.css" type="text/css" rel="stylesheet" />
+    <link href="./scrollIndicator.css" type="text/css" rel="stylesheet" />
+    <link href="./csshake.css" type="text/css" rel="stylesheet" />
+
 
     <script src="./scrollmagic/ScrollMagic.min.js"></script>
     <script src="./scrollmagic/gsap.min.js"></script>
@@ -16,6 +19,8 @@
     <script  src="./scrollmagic/gsap-core.js"></script>
     <script  src="./scrollmagic/animation.gsap.js"></script>
     <script  src="./scrollmagic/debug.addIndicators.js"></script> -->
+
+
 
     <script>
         // init controller
@@ -28,12 +33,16 @@
         <div id="triggerTurnRed" class="trigger"></div>
         <div id="triggerChangeQuote" class="trigger"></div>
         <div id="triggerIncarText" class="trigger"></div>
-
+        <div id="triggerPinQuote" class="trigger"></div>
+        <div id="triggerShake" class="trigger"></div>
 
         <div id="opening-pin">
-            <div class="quote" id="quote-wash">Will all great Neptune's ocean wash this blood clean from my hand? </div>
-            <div class="quote" id="quote-incarnadine">No, these my hands will rather the multitudinous seas
-                <span id="text-incarnadine">incarnadine</span>.
+            <a class="scroll-indicator" id="scroll-indicator1"><span></span><span></span><span></span></a>
+            <div id="quote-container" class="shake-constant">
+                <div class="quote" id="quote-wash">Will all great Neptune's ocean wash this blood clean from my hand? </div>
+                <div class="quote" id="quote-incarnadine">No, these my hands will rather the multitudinous seas
+                    <span id="text-incarnadine" class="shake-constant">incarnadine</span>.
+                </div>
             </div>
             <img id="sea-img" src="./seas.jpg" />
             <img id="incarnadine-img" src="./incarnadine.jpg" />
@@ -47,18 +56,41 @@
     <div id="view-modal"></div>
 
     <script>
-        SCROLL_SCALE = 2;
-        TRIGGER_TURN_RED_TOP = 1;
-        TRIGGER_CHANGE_QUOTE_TOP = 200 * SCROLL_SCALE;
-        CHANGE_QUOTE_END = 300 * SCROLL_SCALE;
-        TRIGGER_INCAR_TEXT_TOP = 350 * SCROLL_SCALE;
+        const DEV_MODE = false;
+        // scale of opening pinned scrolling scenes
+        let SCROLL_SCALE = 1.5;
+
+        // position of triggers
+        let TRIGGER_TURN_RED_TOP = 1;
+        let TRIGGER_CHANGE_QUOTE_TOP = 200 * SCROLL_SCALE;
+        let CHANGE_QUOTE_END = 300 * SCROLL_SCALE;
+        let TRIGGER_INCAR_TEXT_TOP = 350 * SCROLL_SCALE;
         // INCAR_TEXT_END = 450 * SCROLL_SCALE;
-        TURN_RED_END = 450 * SCROLL_SCALE;
+        let TURN_RED_END = 450 * SCROLL_SCALE;
+        let SHAKE_TOGGLE = 460 * SCROLL_SCALE;
+
+        // Percentage positions relative to the image
+        let QUOTE_INITIAL = "15%";
+        let SCROLL_INDICATOR_Y = "60%";
+        let END_PIN_QUOTE = "55%";
+
+        let SHAKE_ELEMENT = "#text-incarnadine";//"#quote-container";
+        let INCAR_SHAKE_TYPE = "shake";
+
+        // [...document.getElementsByClassName("quote")].forEach(element => {
+        //     element.style.top = QUOTE_INITIAL;
+        // });
+
+        document.getElementById("quote-container").style.top = QUOTE_INITIAL;
 
         document.getElementById("triggerTurnRed").style.top = TRIGGER_TURN_RED_TOP + "px";
         document.getElementById("triggerChangeQuote").style.top = TRIGGER_CHANGE_QUOTE_TOP + "px";
         document.getElementById("triggerIncarText").style.top = TRIGGER_INCAR_TEXT_TOP + "px";
+        document.getElementById("triggerPinQuote").style.top = TURN_RED_END + "px";
+        document.getElementById("triggerShake").style.top = SHAKE_TOGGLE + "px";
 
+
+        const incarnadineText = document.getElementById("text-incarnadine");
 
         // Set up the scene for incarnadining
         let sceneTurnRed = new ScrollMagic.Scene({
@@ -71,14 +103,16 @@
             .setPin("#opening-pin", {
                 pushFollowers: true
             })
-            .addIndicators({ name: "1 " }) // add indicators (requires plugin)
             .addTo(controller);
+        if (DEV_MODE === true) {
+            sceneTurnRed.addIndicators({ name: "Turn red " }) // add indicators (requires plugin)
+        }
 
         // Set up the scene for changing text
         let changeQuoteTimeline = new TimelineMax();
         changeQuoteTimeline
-            .add(TweenMax.to("#quote-wash", 1, { opacity: 0 }))
-            .add(TweenMax.to("#quote-incarnadine", 1, { opacity: 1 }));
+            .to("#quote-wash", { opacity: 0, zIndex: 2 })
+            .to("#quote-incarnadine", { opacity: 1 });
         let sceneChangeQuote = new ScrollMagic.Scene({
             triggerElement: "#triggerChangeQuote",
             duration: CHANGE_QUOTE_END - TRIGGER_CHANGE_QUOTE_TOP,
@@ -87,8 +121,11 @@
             .setTween(changeQuoteTimeline)
             // .setTween("#quote-wash", 1, { opacity: 0 })
             // .setTween("#quote-incarnadine", 1, { opacity: 1 })
-            .addIndicators({ name: "2 " }) // add indicators (requires plugin)
             .addTo(controller);
+        if (DEV_MODE === true) {
+            sceneChangeQuote.addIndicators({ name: "Change quote " }) // add indicators (requires plugin)
+
+        }
 
         // Set up the scene for incarnadine the word
         let sceneIncarText = new ScrollMagic.Scene({
@@ -97,8 +134,77 @@
             triggerHook: 0
         })
             .setClassToggle("#text-incarnadine", "text-incarnadine-red")
-            .addIndicators({ name: "3 " }) // add indicators (requires plugin)
             .addTo(controller);
+        if (DEV_MODE === true) {
+            sceneIncarText.addIndicators({ name: "Redden incarnadine" })
+
+        }
+        // When opening is unpinned, start pinning quote, shaking quote, and remove scroll indicator
+
+        // let pinQuoteTimeline = new TimelineMax();
+        // pinQuoteTimeline
+        // // if we want to set position dynamically, might need to call sampleTimeline.restart( ).to("#sampleblock",{x:"200px"},calc());
+        //     .call(() => {
+        //         incarnadineText.classList.add(INCAR_SHAKE_TYPE);
+        //         incarnadineText.classList.add("shake-constant");
+        //     })
+        //     .to("#scroll-indicator1", { opacity: 0 }); // can add more
+
+        let scenePinQuote = new ScrollMagic.Scene({
+            triggerElement: "#triggerPinQuote",
+            duration: 0, // to be set by setPinQuoteDuration
+            triggerHook: 0
+        })
+            // .setTween(pinQuoteTimeline)
+            .setTween("#scroll-indicator1", { opacity: 0 })
+            .setPin("#quote-container")
+            .addTo(controller);
+
+        if (DEV_MODE === true) {
+            scenePinQuote.addIndicators({ name: "Pin quote" })
+        }
+
+        let sceneShakeIncar = new ScrollMagic.Scene({
+            triggerElement: "#triggerShake",
+            triggerHook: 0
+        })
+        .setClassToggle(SHAKE_ELEMENT, INCAR_SHAKE_TYPE)
+        .addTo(controller);
+        if (DEV_MODE === true) {
+            sceneShakeIncar.addIndicators({ name: "Shake" }) // add indicators (requires plugin)
+        }
+
+        // Dynamic set positions relative to image
+        const seaImgElem = document.getElementById("sea-img");
+
+        // change the duration of pin quote scene to correspond to the image height
+        const calcPinQuoteDuration = () => {
+            let result = seaImgElem.clientHeight
+                * (parseFloat(END_PIN_QUOTE) - parseFloat(QUOTE_INITIAL)) / 100.0;
+            return result;
+        };
+        const setPinQuoteDuration = () => {
+            scenePinQuote.duration(calcPinQuoteDuration());
+            scenePinQuote.refresh();
+        };
+
+        // change the top of scroll indicator to correspond to the image height
+        const scrollIndicator = document.getElementById("scroll-indicator1");
+        const calcScrollIndicatorPosition = () => {
+            let result = seaImgElem.clientHeight
+                * (parseFloat(SCROLL_INDICATOR_Y)) / 100.0;
+            return result + "px";
+        };
+        const changeScrollIndicatorPosition = () => {
+            scrollIndicator.style.top = calcScrollIndicatorPosition();
+        }
+
+        new ResizeObserver(() => {
+            setPinQuoteDuration();
+            changeScrollIndicatorPosition();
+
+        }).observe(seaImgElem);
+
     </script>
 </body>
 
