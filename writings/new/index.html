@@ -35,7 +35,11 @@
         <div id="triggerIncarText" class="trigger"></div>
         <div id="triggerPinQuote" class="trigger"></div>
         <div id="triggerShake" class="trigger"></div>
+        <div id="triggerPinMenu" class="trigger"></div>
 
+        <div id="menu">
+            <img id="menu-img-strip" src="./incarnadine-strip1.jpg" />
+        </div>
         <div id="opening-pin">
             <a class="scroll-indicator" id="scroll-indicator1"><span></span><span></span><span></span></a>
             <div id="quote-container" class="shake-constant">
@@ -45,37 +49,43 @@
                 </div>
             </div>
             <img id="sea-img" src="./seas.jpg" />
-            <img id="incarnadine-img" src="./incarnadine.jpg" />
+
+            <div id="incar-img-wrapper">
+                <img id="incarnadine-img" src="./incarnadine.jpg" />
+            </div>
+
         </div>
 
+
     </div>
 
-    <div id="menu">
-        <!-- <img id="menu-img-strip" src="./incarnadine-strip1.jpg" /> -->
-    </div>
-    <div id="view-modal"></div>
+
+    <div id="view-modal"><h1>Content</h1></div>
 
     <script>
         const DEV_MODE = false;
         // scale of opening pinned scrolling scenes
-        let SCROLL_SCALE = 1.5;
+        const SCROLL_SCALE = 2;
 
         // position of triggers
-        let TRIGGER_TURN_RED_TOP = 1;
-        let TRIGGER_CHANGE_QUOTE_TOP = 200 * SCROLL_SCALE;
-        let CHANGE_QUOTE_END = 300 * SCROLL_SCALE;
-        let TRIGGER_INCAR_TEXT_TOP = 350 * SCROLL_SCALE;
+        const TRIGGER_TURN_RED_TOP = 1;
+        const TRIGGER_CHANGE_QUOTE_TOP = 200 * SCROLL_SCALE;
+        const CHANGE_QUOTE_END = 300 * SCROLL_SCALE;
+        const TRIGGER_INCAR_TEXT_TOP = 350 * SCROLL_SCALE;
         // INCAR_TEXT_END = 450 * SCROLL_SCALE;
-        let TURN_RED_END = 450 * SCROLL_SCALE;
-        let SHAKE_TOGGLE = 460 * SCROLL_SCALE;
+        const TURN_RED_END = 450 * SCROLL_SCALE;
+        const SHAKE_TOGGLE = 460 * SCROLL_SCALE;
 
         // Percentage positions relative to the image
-        let QUOTE_INITIAL = "15%";
-        let SCROLL_INDICATOR_Y = "60%";
-        let END_PIN_QUOTE = "55%";
+        const STRIP_HEIGHT = "7.4%"; // 80 : 1080
+        const QUOTE_INITIAL = "15%";
+        const SCROLL_INDICATOR_Y = "60%";
+        const END_PIN_QUOTE = "55%";
+        const MENU_STRIP = "63.5%";
+        const FADE_DURATION = "36.5%";
 
-        let SHAKE_ELEMENT = "#text-incarnadine";//"#quote-container";
-        let INCAR_SHAKE_TYPE = "shake";
+        const SHAKE_ELEMENT = "#text-incarnadine";//"#quote-container";
+        const INCAR_SHAKE_TYPE = "shake";
 
         // [...document.getElementsByClassName("quote")].forEach(element => {
         //     element.style.top = QUOTE_INITIAL;
@@ -139,29 +149,19 @@
             sceneIncarText.addIndicators({ name: "Redden incarnadine" })
 
         }
+
         // When opening is unpinned, start pinning quote, shaking quote, and remove scroll indicator
-
-        // let pinQuoteTimeline = new TimelineMax();
-        // pinQuoteTimeline
-        // // if we want to set position dynamically, might need to call sampleTimeline.restart( ).to("#sampleblock",{x:"200px"},calc());
-        //     .call(() => {
-        //         incarnadineText.classList.add(INCAR_SHAKE_TYPE);
-        //         incarnadineText.classList.add("shake-constant");
-        //     })
-        //     .to("#scroll-indicator1", { opacity: 0 }); // can add more
-
         let scenePinQuote = new ScrollMagic.Scene({
             triggerElement: "#triggerPinQuote",
             duration: 0, // to be set by setPinQuoteDuration
             triggerHook: 0
         })
-            // .setTween(pinQuoteTimeline)
             .setTween("#scroll-indicator1", { opacity: 0 })
             .setPin("#quote-container")
             .addTo(controller);
 
         if (DEV_MODE === true) {
-            scenePinQuote.addIndicators({ name: "Pin quote" })
+            scenePinQuote.addIndicators({ name: "Pin quote" });
         }
 
         let sceneShakeIncar = new ScrollMagic.Scene({
@@ -171,10 +171,54 @@
         .setClassToggle(SHAKE_ELEMENT, INCAR_SHAKE_TYPE)
         .addTo(controller);
         if (DEV_MODE === true) {
-            sceneShakeIncar.addIndicators({ name: "Shake" }) // add indicators (requires plugin)
+            sceneShakeIncar.addIndicators({ name: "Shake" }); // add indicators (requires plugin)
         }
 
-        // Dynamic set positions relative to image
+        // Pin menu beginning
+        // let scenePinMenuBeginning = new ScrollMagic.Scene({
+        //     triggerElement: "#triggerTurnRed",
+        //     duration: TURN_RED_END - TRIGGER_TURN_RED_TOP,
+        //     triggerHook: 0
+        // })
+        //     .setPin("#menu", {pushFollowers: false})
+        //     .addTo(controller);
+
+        // if (DEV_MODE === true) {
+        //     scenePinMenuBeginning.addIndicators({ name: "Pin menu beginning" });
+        // }
+
+        // Show pinned menu
+        let scenePinMenu = new ScrollMagic.Scene({
+            triggerElement: "#triggerPinMenu",
+            triggerHook: 0
+        })
+            // .setPin("#menu", {pushFollowers: false})
+            .setClassToggle("#menu", "menu-show")
+            .addTo(controller);
+
+        if (DEV_MODE === true) {
+            scenePinMenu.addIndicators({ name: "Pin menu" });
+        }
+
+        // Fade out picture, fade in view modal
+        let fadeModalTimeline = new TimelineMax();
+        fadeModalTimeline
+            .to("#incarnadine-img", { opacity: 0 }, 0)
+            .to("#view-modal", { opacity: 1 }, 0);
+
+        let sceneFadeModal = new ScrollMagic.Scene({
+            triggerElement: "#triggerPinMenu",
+            duration: 100, // to be set by setPinQuoteDuration
+            triggerHook: 0
+        })
+            .setTween(fadeModalTimeline)
+            // .setClassToggle("#opening", "opening-light")
+            .addTo(controller);
+        if (DEV_MODE === true) {
+            sceneFadeModal.addIndicators({ name: "Fade modal" });
+        }
+
+        // Dynamically set positions relative to image
         const seaImgElem = document.getElementById("sea-img");
 
         // change the duration of pin quote scene to correspond to the image height
@@ -199,10 +243,60 @@
             scrollIndicator.style.top = calcScrollIndicatorPosition();
         }
 
+        // change the top of menu to correspond to the image height
+        // const menu = document.getElementById("menu");
+        // const calcMenuPosition = () => {
+        //     let relativeToImg = seaImgElem.clientHeight
+        //         * (parseFloat(MENU_STRIP)) / 100.0;
+        //     console.log("hi", relativeToImg);
+        //     return relativeToImg + "px";
+        // };
+        // const changeMenuPosition = () => {
+        //     menu.style.top = calcMenuPosition();
+        // };
+
+        // change the top of pin menu trigger
+        const pinMenuTrigger = document.getElementById("triggerPinMenu");
+        const calcMenuTriggerPosition = () => {
+            let relativeToImg = seaImgElem.clientHeight
+                * (parseFloat(MENU_STRIP)) / 100.0;
+            // console.log("hi", TURN_RED_END - TRIGGER_TURN_RED_TOP);
+            return TURN_RED_END - TRIGGER_TURN_RED_TOP + relativeToImg + "px";
+        };
+        const changePinMenuTrigger = () => {
+            pinMenuTrigger.style.top = calcMenuTriggerPosition();
+        };
+
+        // const menuStrip = document.getElementById("menu-img-strip");
+        const viewModal = document.getElementById("view-modal");
+        const changeViewModalPaddingTop = () => {
+            console.log(seaImgElem.clientHeight * (parseFloat(STRIP_HEIGHT)) / 100.0);
+            viewModal.style.paddingTop = seaImgElem.clientHeight * (parseFloat(STRIP_HEIGHT)) / 100.0 + "px";
+        };
+
+        // change the duration of fade modal scene to correspond to the image height
+        const calcFadeModalDuration = () => {
+            let result = seaImgElem.clientHeight
+                * (parseFloat(FADE_DURATION)) / 100.0;
+            console.log(result);
+            return result;
+        };
+        const setFadeModalDuration = () => {
+            sceneFadeModal.duration(calcFadeModalDuration());
+            sceneFadeModal.refresh();
+        };
+
+        // setTimeout(()=>{changeMenuPosition(); console.log("hey");}, 500);
         new ResizeObserver(() => {
+            // if (seaImgElem.clientHeight === 0) {
+            //     return;
+            // }
             setPinQuoteDuration();
             changeScrollIndicatorPosition();
-
+            // changeMenuPosition();
+            changePinMenuTrigger();
+            changeViewModalPaddingTop();
+            setFadeModalDuration();
         }).observe(seaImgElem);
 
     </script>
