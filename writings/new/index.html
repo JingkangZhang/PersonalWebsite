@@ -204,7 +204,7 @@
         // Zoom out quote
         let zoomOutQuoteTimeline = new TimelineMax();
         zoomOutQuoteTimeline
-            .to("#quote-incarnadine", { opacity: 0 }, 0)
+            // .to("#quote-incarnadine", { opacity: 0 }, 0)
             .to("#quote-incarnadine", { scale: 1.5 }, 0);
 
         let sceneZoomOutQuote = new ScrollMagic.Scene({
@@ -329,7 +329,7 @@
             sceneFadeModal.refresh();
         };
 
-        // setTimeout(()=>{changeMenuPosition(); console.log("hey");}, 500);
+        // setTimeout(()=>{document.getElementById("#quote-incarnadine").style.opacity=0;}, 200);
         new ResizeObserver(() => {
             // if (seaImgElem.clientHeight === 0) {
             //     return;
