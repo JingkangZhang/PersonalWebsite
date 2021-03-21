@@ -4,9 +4,8 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!-- <meta name="viewport" content="width=device-width, height=device-height"> -->
     <title>Jingkang Zhang Writings</title>
-    <link href="./index.css?v=3" type="text/css" rel="stylesheet" />
+    <link href="./index.css?v=4" type="text/css" rel="stylesheet" />
     <link href="./scrollIndicator.css" type="text/css" rel="stylesheet" />
     <link href="./csshake.css" type="text/css" rel="stylesheet" />
 
@@ -30,7 +29,6 @@
 </head>
 
 <body>
-    <!-- <div id="anti-scroll-wrapper"> -->
     <div id="opening">
         <div id="triggerTurnRed" class="trigger"></div>
         <div id="triggerChangeQuote" class="trigger"></div>
@@ -47,9 +45,11 @@
         <div id="opening-pin">
             <a class="scroll-indicator" id="scroll-indicator1"><span></span><span></span><span></span></a>
             <div id="quote-container" class="shake-constant">
-                <div class="quote" id="quote-wash">Will all great Neptune's ocean wash this blood clean from my hands? </div>
-                <div class="quote" id="quote-incarnadine">No, these my hands will rather the multitudinous seas
-                    <span id="text-incarnadine" class="shake-constant">incarnadine</span>.
+                <div id="quote-hide-scaled-quote">
+                    <div class="quote" id="quote-wash">Will all great Neptune's ocean wash this blood clean from my hands? </div>
+                    <div class="quote" id="quote-incarnadine">No, these my hands will rather the multitudinous seas
+                        <span id="text-incarnadine" class="shake-constant">incarnadine</span>.
+                    </div>
                 </div>
             </div>
             <img id="sea-img" src="./seas.jpg" />
@@ -214,7 +214,7 @@
             triggerHook: 0
         })
             .setTween(zoomOutQuoteTimeline)
-            // .setClassToggle("#opening", "opening-light")
+            // .setClassToggle("#quote-incarnadine", "quote-incarnadine-none")
             .addTo(controller);
         if (DEV_MODE === true) {
             sceneZoomOutQuote.addIndicators({ name: "Zoom out quote" });

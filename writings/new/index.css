@@ -1,7 +1,4 @@
-html body {
-    overflow-x: hidden;
-    position: relative;
-}
+
 body {
     margin: 0;
     background-color: #111;
@@ -102,11 +99,17 @@ body {
 
 }
 
-.quote {
-    /* width: 80%; */
+#quote-hide-scaled-quote {
+    position: relative;
     left: 50%;
     text-align: center;
     transform: translate(-50%, 0);
+    width: 100%;
+    overflow: hidden;
+    z-index: 2;
+}
+
+.quote {
     font-family: Garamond, 'Times New Roman', Times, serif;
     color: white;
     text-shadow: -2px 0 #333, 0 2px #333, 2px 0 #333, 0 -2px #333;
