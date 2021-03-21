@@ -1,7 +1,7 @@
 html body {
     overflow-x: hidden;
+    position: relative;
 }
-
 body {
     margin: 0;
     background-color: #111;
