@@ -13,6 +13,43 @@ body {
     height: 100vh;
 } */
 
+@media only screen and (max-device-width: 812px) and (orientation: portrait) {
+
+
+    #opening img {
+        width: auto !important;
+        left: 50%;
+        transform: translateX(-40%);
+    }
+
+    #opening-pin {
+        height: 100vh;
+        /* incredible bug in the above line.. I didn't set height to vh, causing the image to disappear */
+        width: 100vw;
+        overflow-x: hidden;
+    }
+
+    #sea-img {
+        height: 100%;
+        width: auto;
+    }
+
+    #incar-img-wrapper {
+        height: 100%;
+        width: auto;
+    }
+
+    #incarnadine-img {
+        height: 100%;
+        width: auto;
+    }
+
+    .quote {
+        font-size: 8vw !important;
+    }
+
+}
+
 #view-modal {
     /* height: calc(100vh - 80px); */
     height: 100%;
