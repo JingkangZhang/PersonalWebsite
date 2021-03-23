@@ -45,6 +45,8 @@
 
         <div id="menu">
             <img id="menu-img-strip" src="./incarnadine-strip1.jpg" />
+            <div id="menu-content"><span>Jingkang Zhang's Writings</span></div>
+
         </div>
         <div id="opening-pin">
             <a class="scroll-indicator" id="scroll-indicator1"><span></span><span></span><span></span></a>
@@ -68,8 +70,12 @@
     </div>
 
     <div id="view-modal"><h1>Content</h1></div>
+
+
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
     <script>
-        const DEV_MODE = false;
+        const DEV_MODE = true;
         // scale of opening pinned scrolling scenes
         const SCROLL_SCALE = 2;
 
@@ -227,8 +233,9 @@
         // Fade out picture, fade in view modal
         let fadeModalTimeline = new TimelineMax();
         fadeModalTimeline
-            .to("#incarnadine-img", { opacity: 0 }, 0)
-            .to("#view-modal", { opacity: 1 }, 0);
+            // .to("#incarnadine-img", { opacity: 0 }, 0)
+            .to("#view-modal", { opacity: 1 }, 0)
+            // .to("#incar-img-wrapper", {backgroundColor: "#ffebcd"}, 0);
 
         let sceneFadeModal = new ScrollMagic.Scene({
             triggerElement: "#triggerPinMenu",
@@ -236,6 +243,7 @@
             triggerHook: 0
         })
             .setTween(fadeModalTimeline)
+            .setPin("#opening-pin", {pushFollowers: false})
             // .setClassToggle("#opening", "opening-light")
             .addTo(controller);
         if (DEV_MODE === true) {

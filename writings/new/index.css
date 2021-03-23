@@ -60,6 +60,7 @@ body {
     z-index: 1;
     opacity: 0;
     overflow-x: hidden;
+    /* margin-top: -63px; */
 
 }
 
@@ -120,7 +121,7 @@ body {
     left: 0;
     top: 0;
     position: absolute;
-    background-color: blanchedalmond;
+    /* background-color: blanchedalmond; */
     z-index: -4;
 
 }

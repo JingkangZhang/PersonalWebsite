@@ -1,3 +1,5 @@
-h1 {
-    /* color: red; */
+@media only screen and (max-device-width: 812px) {
+    p {
+        /* font-size: 18px; */
+    }
 }
