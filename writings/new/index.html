@@ -199,18 +199,6 @@
         //     scenePinMenuBeginning.addIndicators({ name: "Pin menu beginning" });
         // }
 
-        // Show pinned menu
-        let scenePinMenu = new ScrollMagic.Scene({
-            triggerElement: "#triggerPinMenu",
-            triggerHook: 0
-        })
-            // .setPin("#menu", {pushFollowers: false})
-            .setClassToggle("#menu", "menu-show")
-            .addTo(controller);
-
-        if (DEV_MODE === true) {
-            scenePinMenu.addIndicators({ name: "Pin menu" });
-        }
 
         // Zoom out quote
         let zoomOutQuoteTimeline = new TimelineMax();
@@ -230,28 +218,35 @@
             sceneZoomOutQuote.addIndicators({ name: "Zoom out quote" });
         }
 
-        // Fade out picture, fade in view modal
+
+        let scenePinMenu = new ScrollMagic.Scene({
+            triggerElement: "#triggerPinMenu",
+            triggerHook: 0
+        })
+            .setPin("#opening-pin", {pushFollowers: false})
+            .setClassToggle("#menu", "menu-show")
+            // .setClassToggle("#opening", "opening-light")
+            .addTo(controller);
+        if (DEV_MODE === true) {
+            scenePinMenu.addIndicators({ name: "Pin menu" });
+        }
+
+        // fade in view modal
         let fadeModalTimeline = new TimelineMax();
         fadeModalTimeline
             // .to("#incarnadine-img", { opacity: 0 }, 0)
             .to("#view-modal", { opacity: 1 }, 0)
             // .to("#incar-img-wrapper", {backgroundColor: "#ffebcd"}, 0);
-
         let sceneFadeModal = new ScrollMagic.Scene({
-            triggerElement: "#triggerPinMenu",
-            duration: 100, // to be set by setPinQuoteDuration
+            triggerElement: "#triggerPinQuote",
+            duration: 0, // to be set by setFadeModalDuration
             triggerHook: 0
         })
             .setTween(fadeModalTimeline)
-            .setPin("#opening-pin", {pushFollowers: false})
-            // .setClassToggle("#opening", "opening-light")
             .addTo(controller);
         if (DEV_MODE === true) {
             sceneFadeModal.addIndicators({ name: "Fade modal" });
         }
-
-
-
 
 
         // Dynamically set positions relative to image
@@ -332,8 +327,7 @@
 
         // change the duration of fade modal scene to correspond to the image height
         const calcFadeModalDuration = () => {
-            let result = seaImgElem.clientHeight
-                * (parseFloat(FADE_DURATION)) / 100.0;
+            let result = parseFloat(calcPinMenuTriggerPosition()) - parseFloat(document.getElementById("triggerPinQuote").style.top);
             console.log(result);
             return result;
         };
