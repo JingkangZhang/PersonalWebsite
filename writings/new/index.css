@@ -84,7 +84,48 @@ body {
 
 #menu-img-strip {
     width: 100%;
-    vertical-align: middle;
+    left: 0;
+    top: 0;
+    display: block;
+    z-index: -1;
+    position: relative;
+}
+
+#menu-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 3vh;
+    color: white;
+}
+
+#menu-title {
+    margin-left: 10px;
+}
+
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: inherit;
+    font-weight: inherit;
+}
+
+#menu-info {
+    margin-right: 20px;
+    height: 3vh;
+}
+
+#menu-info-icon {
+    height: 3vh;
+    width: 3vh;
+    filter: invert(1);
 }
 
 #opening-wrapper {
@@ -106,7 +147,7 @@ body {
 
 }
 
-#opening img {
+#opening-pin img {
     width: 100%;
     left: 0;
     top: 0;

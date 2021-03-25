@@ -44,9 +44,11 @@
 
 
         <div id="menu">
+            <div id="menu-content">
+                <div id="menu-title"><a id="menu-zjk-link" href="https://jingkangzhang.com">Jingkang Zhang</a>'s Writings</div>
+                <div id="menu-info"><img id="menu-info-icon" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAYAAACqaXHeAAAABmJLR0QA/wD/AP+gvaeTAAAFOElEQVR4nO2bz29VRRTHP0rzjLQ1Le1GRNsALW6MYhpsLRr0H6CJQEwM4E5JkNiqiW1csNG/wLjp1ggmJiZEH7pR4y+EqlA3Up+/E3GhgQbe01qLdXHu9Z6Zd+/7dWembew3ucm0995zvnPezJkzZ86Fdazjf40bAugoAPcBI8CO6LoV6Abao2cqwBXgV+Ai8A1wBjgLLAbg6BydwGHgHaRzyy1elUjGYaAjaA9axAAwDZRpvdNZVzmSPeCSsKsp0A+8BBwANqTcnwPeB2aR4f0jMuTL0f0OYBPQh0yRu4E9UdvGdeB1YAr4yRH/llEAJkkf5ueBcWBLDvlbgAngQor8SqS7kEN+LmwDPrdI/QOcAoY96BsB3op0aJ0zEZegGAPmLSLngKEAundRbfj5iFMQHEHmYaz8T+AocGMoAoifORbpjnksRdy8YgrT8nOIw1op7ARKFqcpX8qetBSdBXp9KWsC3cDHmNyOuVYyhjnsTwMbXSvJgY1IwKSngzOfsA3T4X1GEsKuJtwMfETC8yowmFdoAdPjziFDLi9GkV/sWnSdBu53ILcH0yfMkDNOmMT09i4c3n7gb8w5uxz9b58D+fcCC0ru860K6seM8I46INdNdfygrytAlwM9TyuZFSTEbhqvKSHncLPOHyS78/H1mAM9G4AvlMxXmxUwgHjSOLx1FeHpKZV1TTrSNaJkLgHbm3l5Wr18yhEhCDcCYhSV3OlGX+rE3M+73NjU8wGXceMDYowq2WUaTKo8rl4675BMjH2krwKLwCMe9M0qHYcaeUFHVOMeCIHMzyISrFwF3sbPFhrgWZL+FOs9XMBc+vIkM1YL7sCcBjUDowfVw197pxYOOjp8QN+w13Y9DD/wTCok3lNtY6rZBrhTtWe90QmPr1TbSLTaBtA357zRCQ/dF8MAbdaDm1X7B290BCMk0doZZJvtC9+r9m21HvydxFn0eCLThWx/7TigiNsgSKNX6fmt1oN/qQd95dvTOt/wOt0iblI6Fmo96NsAeoOSdfkIiDINYDvBa6rd6YFII1kfF5khG7ovuo81DXCLZyJZ8KFXy6xpgEuq3e+ByEphq2r/om/YBrio2mkns2sVmfGNbQB98x5vdMJDJ3NrGkAHI3u80QmPh1XbCLjSDPBH1N4B3O6RVCj0kRyfV5Ajvf9gG2AROV2Jsd8fr2A4oNofYhVdpaW6T6r2QR+MAkP34YR9M80AbyBDBcQR+ghMQmE3cFfUrgBv2g+kGaCMaSlv5+0B8IJqnyApyqoL+2BklyNCx6m/FzjuSJdOiWcejGQdd5WQUjSQUrpXSC9/W61oA15Wf58Evm1WSB9mhthF1cUz1B8BEw70TCh5ZSQz3BLs4/GdOYkNU98AebfDQzg6HgfJCcwoYSXyZ4p8JkR6ge+UvNwFElBdIvMp+eqDujAPLV2lxNqRSDaWN4+5C8yFMZJVYRk5PstbJDWMHL2Nk3/YtwPvYnr9vTllVuEJzF9stZTJbQI+weT2lC9ldqFkCanJWSkMYc75ZdwVWGTiCOZ0WEBqckLGCW3IUqe9/RJSzBkEe6kudPgSyfr6xihSt6B1z+NhztfDVswlUnvzUQ/6dpO+hM7g0Ns3i1ofTMwixQktR2FINPoccrhpyy8jQU6udd7VJzN9wIvAo6T7ghJy3H6B5JOZy5ifzPREcgaRbfhDpG9griOx/RTwsyP+zrAd/x9NNVXutlLoQAqSiuQzRjmScQhPn82F/nByEEm2bkbC3rhTZcSTX0LS1mv+w8l1rGON4F9sPDl8TiwylAAAAABJRU5ErkJggg=="/></div>
+            </div>
             <img id="menu-img-strip" src="./incarnadine-strip1.jpg" />
-            <div id="menu-content"><span>Jingkang Zhang's Writings</span></div>
-
         </div>
         <div id="opening-pin">
             <a class="scroll-indicator" id="scroll-indicator1"><span></span><span></span><span></span></a>
@@ -74,6 +76,19 @@
 
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
+    <script>
+        tippy("#menu-info-icon", {
+            content: `<div>
+                <div>Photo by <a href="https://math.berkeley.edu/people/grad/emily-bain" target="_blank">Emily Bain</a></div>
+                <div>Design inspired by <a href="https://english.berkeley.edu/users/73" target="_blank">James Turner</a></div>
+                <div>Quote from <i>Macbeth</i> by Shakespeare</div>
+                </div>`,
+            allowHTML: true,
+            // trigger: 'click',
+            // hideOnClick: true,
+            interactive: true,
+        });
+    </script>
     <script>
         const DEV_MODE = true;
         // scale of opening pinned scrolling scenes
