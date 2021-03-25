@@ -107,11 +107,11 @@ body {
 }
 
 
-a,
-a:link,
-a:visited,
-a:hover,
-a:active {
+#opening a,
+#opening a:link,
+#opening a:visited,
+#opening a:hover,
+#opening a:active {
     color: inherit;
     text-decoration: inherit;
     font-weight: inherit;
