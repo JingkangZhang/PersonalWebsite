@@ -1,347 +1,376 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-139602857-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-139602857-1"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-		  gtag('config', 'UA-139602857-1');
-		</script>
-		<!-- Google Tag Manager -->
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-		})(window,document,'script','dataLayer','GTM-W5N6TMZ');</script>
-		<!-- End Google Tag Manager -->
+      gtag("config", "UA-139602857-1");
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-W5N6TMZ");
+    </script>
+    <!-- End Google Tag Manager -->
 
-		<title>Jingkang Zhang</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				background-color: #000;
-				color: #fff;
-				margin: 0px;
-				/* overflow: hidden; */
-			}
-			a {
-				color: white;
-			}
-			#info {
-				text-align: center;
-			}
+    <title>Jingkang Zhang</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        margin: 0px;
+        /* overflow: hidden; */
+      }
+      a {
+        color: white;
+      }
+      #info {
+        text-align: center;
+      }
 
+      #tout {
+        position: relative;
+        height: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+      #tout:first-child div {
+        display: block;
+        width: 100px;
+        height: 100px;
+        border: 3px solid #bbb;
+        border-radius: 50%;
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+      }
 
-			#tout {
-			  position: relative;
-			  height: 0;
-			  top: 50%;
-			  transform: translateY(-50%);
-			}
-			#tout:first-child div {
-			  display: block;
-			  width: 100px;
-			  height: 100px;
-			  border: 3px solid #bbb;
-			  border-radius: 50%;
-			  position: relative;
-			  top: 0;
-			  right: 0;
-			  bottom: 0;
-			  left: 0;
-			  margin: auto;
-			}
+      #tout:first-child > div > div {
+        width: 90px;
+        height: 90px;
+        border: 5px solid #bbb;
+        border-radius: 50%;
+        margin: auto;
+        overflow: hidden;
+      }
 
-			#tout:first-child>div>div {
-			  width: 90px;
-			  height: 90px;
-			  border: 5px solid #bbb;
-			  border-radius: 50%;
-			  margin: auto;
-			  overflow: hidden;
-			}
+      #tout:first-child div div div {
+        width: 110px;
+        height: 110px;
+        margin: auto;
+        top: 360px;
+        background-color: #999;
+        border-radius: 0%;
+        border: none;
+        animation-name: anim, color;
+        animation-duration: 0.8s;
+        animation-timing-function: ease;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+      }
 
-			#tout:first-child div div div {
-			  width: 110px;
-			  height: 110px;
-			  margin: auto;
-			  top: 360px;
-			  background-color: #999;
-			  border-radius: 0%;
-			  border: none;
-			  animation-name: anim, color;
-			  animation-duration: 0.8s;
-			  animation-timing-function:ease;
-			  animation-iteration-count:infinite;
-			  animation-direction: alternate;
-			}
+      @keyframes anim {
+        100% {
+          top: 0;
+        }
+      }
+      #container {
+        margin: auto;
+        width: 100vw;
+        height: 75vh;
+      }
+    </style>
+  </head>
 
-			@keyframes anim{
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript
+      ><iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-W5N6TMZ"
+        height="0"
+        width="0"
+        style="display: none; visibility: hidden"
+      ></iframe
+    ></noscript>
+    <!-- End Google Tag Manager (noscript) -->
 
-			  100% { top:0 }
-			}
-			#container {
-				margin:auto;
-				width: 100vw;
-				height: 75vh;
+    <div id="container">
+      <div id="tout">
+        <div>
+          <div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="info">
+      <br /><a href="./name.html" target="_blank" style="text-decoration: none"
+        >Jingkang Zhang</a
+      >
+      <br />
+      Founding Engineer @ <a href="https://kindroid.ai/">Kindroid</a> |
+      <a href="https://cal.berkeley.edu/zjk">UC Berkeley 21'</a>
+      <br />
+      <!-- <a href="./resume.pdf" target="_blank">Resume</a> | -->
+      <a href="https://www.linkedin.com/in/jingkang-zhang/">LinkedIn</a> |
+      <a href="https://github.com/JingkangZhang">GitHub</a> |
+      <a href="./writings">Writings</a>
+      <!-- |
+      <a href="./teaching.html" target="_blank">Teaching</a> -->
+    </div>
 
-			}
-		</style>
-	</head>
+    <script src="./js/three.min.js"></script>
+    <!-- <script src="./js/ziploader.min.js"></script> -->
+    <script src="./js/jszip.min.js"></script>
+    <script src="./js/PLYLoaderCustomize.js"></script>
+    <!-- <script src="./js/three/examples/js/loaders/PLYLoader.js"></script> -->
+    <!-- <script src="./js/three/examples/js/loaders/PLYLoaderNoNormal.js"></script> -->
+    <!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
+    <!-- <script src="./js/three/examples/js/controls/TrackballControls.js"></script> -->
+    <script src="./js/three/examples/js/controls/OrbitControls.js"></script>
+    <script>
+      var camera, controls, scene, renderer;
+      var center;
+      var points;
+      var model_url = "./models/headp_no_normal.ply.zip";
+      var unzipped_name = "headp_no_normal.ply";
+      var container = document.getElementById("container");
+      init();
 
-	<body>
-		<!-- Google Tag Manager (noscript) -->
-		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-W5N6TMZ"
-		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-		<!-- End Google Tag Manager (noscript) -->
+      function init() {
+        // renderer and camera
+        {
+          renderer = new THREE.WebGLRenderer({ antialias: true });
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(container.offsetWidth, container.offsetHeight);
+          container.appendChild(renderer.domElement);
+          scene = new THREE.Scene();
+          scene.background = new THREE.Color(0x000000);
+          camera = new THREE.PerspectiveCamera(
+            15,
+            container.offsetWidth / container.offsetHeight,
+            0.01,
+            40
+          );
+          camera.position.x = 1.5; // x and z determines face direction
+          camera.position.z = 0; // - 2
+          camera.position.y = 1; // y determines angle from above
+          scene.add(camera);
+          // camera.up.set( -1, 0, 0 );
+        }
 
-		<div id="container">
-			<div id="tout">
-			  <div>
-			    <div>
-			      <div>
-			      </div>
-			    </div>
-			  </div>
-			</div>
-		</div>
-		<div id="info">
-			<br /><a href="./name.html" target="_blank" style="text-decoration: none;">Jingkang Zhang</a> 
-			<br /> Software Engineer @ <a href="https://www.rippling.com/">Rippling</a> | <a href="https://cal.berkeley.edu/zjk">UC Berkeley 21'</a>
-			<br />
-			<!-- <a href="./resume.pdf" target="_blank">Resume</a> | -->
-			<a href="https://www.linkedin.com/in/jingkang-zhang/">LinkedIn</a> |
-			<a href="https://github.com/JingkangZhang">GitHub</a> |
-			<a href="./writings">Writings</a> |
-			<a href="./teaching.html" target="_blank">Teaching</a>
-		</div>
+        // loading
+        {
+          var tout = document.getElementById("tout");
+          function onProgress(xhr) {
+            if (xhr.lengthComputable) {
+              var percentComplete = (xhr.loaded / xhr.total) * 100;
+              console.log(
+                "model " + Math.round(percentComplete, 2) + "% downloaded"
+              );
+            }
+          }
+          var onLoad = function (geometry) {
+            // var color = [];
+            // tout.style.display = "none";
+            // tout.style.position = "absolute";
+            tout.parentNode.removeChild(tout);
+            var material = new THREE.PointsMaterial({ size: 0.0045 });
+            // geometry.addAttribute( 'color', []);
+            // material.color.setHex(0xAAAAAA);
+            // Below idea is thanks to @marquizzo
+            material.blending = THREE.AdditiveBlending;
+            // console.log("geometry, ", geometry);
+            // build mesh
+            var mesh = new THREE.Points(geometry, material);
+            mesh.name = "headp.ply";
+            // console.log("mesh, ", mesh);
+            scene.add(mesh);
 
-		<script src="./js/three.min.js"></script>
-		<!-- <script src="./js/ziploader.min.js"></script> -->
-		<script src="./js/jszip.min.js"></script>
-		<script src="./js/PLYLoaderCustomize.js"></script>
-		<!-- <script src="./js/three/examples/js/loaders/PLYLoader.js"></script> -->
-		<!-- <script src="./js/three/examples/js/loaders/PLYLoaderNoNormal.js"></script> -->
-		<!-- <script src="node_modules/three/examples/js/loaders/PCDLoader.js"></script> -->
-		<!-- <script src="./js/three/examples/js/controls/TrackballControls.js"></script> -->
-		<script src="./js/three/examples/js/controls/OrbitControls.js"></script>
-		<script>
-			var camera, controls, scene, renderer;
-			var center;
-			var points;
-			var model_url = "./models/headp_no_normal.ply.zip";
-			var unzipped_name = "headp_no_normal.ply";
-			var container = document.getElementById("container");
-			init();
+            center = mesh.geometry.boundingSphere.center;
+            camera.lookAt(center);
+            center.x -= 0.03;
+            center.y += 0;
+            points = mesh;
+            // controls.target.set( center.x, center.y, center.z );
+            // controls.update();
+            animate();
+          };
 
-			function init() {
-				// renderer and camera
-				{
-					renderer = new THREE.WebGLRenderer( { antialias: true } );
-					renderer.setPixelRatio( window.devicePixelRatio );
-					renderer.setSize( container.offsetWidth, container.offsetHeight );
-					container.appendChild( renderer.domElement );
-					scene = new THREE.Scene();
-					scene.background = new THREE.Color( 0x000000 );
-					camera = new THREE.PerspectiveCamera( 15, container.offsetWidth / container.offsetHeight, 0.01, 40 );
-					camera.position.x = 1.5; // x and z determines face direction
-					camera.position.z = 0; // - 2
-					camera.position.y = 1; // y determines angle from above
-					scene.add( camera );
-					// camera.up.set( -1, 0, 0 );
-				}
+          new Promise(function (resolve, reject) {
+            var loader = new THREE.FileLoader(new THREE.LoadingManager());
+            loader.setResponseType("arraybuffer");
+            loader.load(model_url, resolve, onProgress);
+          })
+            .then(function (buffer) {
+              return JSZip.loadAsync(buffer).then(function (zip) {
+                // console.log(zip);
+                return zip.file(unzipped_name).async("string");
+              });
+            })
+            .then(function (text) {
+              // console.log(text);
+              onLoad(THREE.PLYLoader.prototype.parse(text));
+            });
+        }
 
+        window.addEventListener("resize", onWindowResize, false);
+        window.addEventListener("keypress", keyboard);
+      }
+      function onWindowResize() {
+        camera.aspect = container.offsetWidth / container.offsetHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.offsetWidth, container.offsetHeight);
+        // controls.handleResize();
+      }
+      function getRandom(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+      var prevHue = getRandom(0, 1);
+      var prevSat = getRandom(0.4, 0.8);
+      var prevLight = getRandom(0.6, 0.8);
+      // var flashingHue = 0;
+      function changeColor(mode) {
+        //mode = 1 is flashing dark mode, mode = 2 is brighter than normal, 3 is normal
 
-				// loading
-				{
+        // var randHue = mode == 1 ? (flashingHue + 0.1) % 1 : getRandom(0, 1);
+        var randHue = getRandom(0, 1);
+        var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
+        var randLight = mode == 1 ? 0.1 : getRandom(0.6, 0.8);
+        // flashingHue = randHue;
+        if (mode == 2) {
+          var hueDistance = Math.abs(prevHue - randHue);
+          hueDistance = Math.min(hueDistance, 1 - hueDistance);
+          while (prevHue !== -1 && hueDistance < 0.1) {
+            randHue = getRandom(0, 1);
+            hueDistance = Math.abs(prevHue - randHue);
+            hueDistance = Math.min(hueDistance, 1 - hueDistance);
+            // console.log("in loop");
+          }
+          // console.log(prevHue);
+          prevHue = randHue;
+          prevSat = randSat;
+          prevLight = randLight;
+        } else if (mode == 3) {
+          randHue = prevHue;
+          randSat = prevSat;
+          randLight = prevLight;
+        }
+        // console.log(randHue);
 
-					var tout = document.getElementById("tout");
-					function onProgress( xhr ) {
-						if ( xhr.lengthComputable ) {
-							var percentComplete = xhr.loaded / xhr.total * 100;
-							console.log( 'model ' + Math.round( percentComplete, 2 ) + '% downloaded' );
-						}
-					}
-					var onLoad = function ( geometry ) {
-							// var color = [];
-							// tout.style.display = "none";
-							// tout.style.position = "absolute";
-							tout.parentNode.removeChild(tout);
-							var material = new THREE.PointsMaterial( { size: 0.0045 } );
-							// geometry.addAttribute( 'color', []);
-							// material.color.setHex(0xAAAAAA);
-							// Below idea is thanks to @marquizzo
-							material.blending = THREE.AdditiveBlending;
-							// console.log("geometry, ", geometry);
-							// build mesh
-							var mesh = new THREE.Points( geometry, material );
-							mesh.name = "headp.ply";
-							// console.log("mesh, ", mesh);
-							scene.add( mesh );
+        points.material.color.setHSL(randHue, randSat, randLight);
+        // console.log(randHue, randSat, randLight);
+        points.material.needsUpdate = true;
+      }
+      function keyboard(ev) {
+        switch (ev.key || String.fromCharCode(ev.keyCode || ev.charCode)) {
+          case "+":
+            points.material.size *= 1.2;
+            points.material.needsUpdate = true;
+            break;
+          case "-":
+            points.material.size /= 1.2;
+            points.material.needsUpdate = true;
+            break;
+          case "c":
+            changeColor(2);
+            break;
+        }
+      }
+      var animationComplete = false;
+      var last = 0;
+      var changeTime = 15;
+      var flashTime = 0.5;
+      var flashBrightStarted = false;
+      function animate(now) {
+        requestAnimationFrame(animate);
+        if (!last || now - last >= changeTime * 1000) {
+          // the normal display interval
+          last = now;
+          changeColor(3);
+          if (flashBrightStarted) {
+            points.material.size /= 1.8;
+            flashBrightStarted = false;
+          }
+          // changeTime = getRandom(2, 3);
+        } else if (now - last >= changeTime * 1000 - flashTime * 0.2 * 1000) {
+          // the flash bright interval
+          if (!flashBrightStarted) {
+            changeColor(2);
+          } else {
+            changeColor(3);
+          }
 
-							center = mesh.geometry.boundingSphere.center;
-							camera.lookAt(center);
-							center.x -= 0.03;
-							center.y += 0;
-							points = mesh;
-							// controls.target.set( center.x, center.y, center.z );
-							// controls.update();
-							animate();
-					};
+          if (!flashBrightStarted) {
+            points.material.size *= 1.8;
+            flashBrightStarted = true;
+          }
+        } else if (now - last >= changeTime * 1000 - flashTime * 1000) {
+          // the flashing dark (flashing color) interval
+          changeColor(1);
+        }
+        if (center && !animationComplete) {
+          if (camera.position.y > 0.001) {
+            camera.position.y -= 0.01;
+            camera.position.x += 0.005;
+            camera.lookAt(center);
+          } else {
+            animationComplete = true;
+            // controls
+            {
+              controls = new THREE.OrbitControls(camera, container);
+              controls.dampingFactor = 0.25;
+              controls.screenSpacePanning = true;
+              controls.minDistance = 2;
+              controls.maxDistance = 2;
+              controls.maxPolarAngle = Math.PI / 2;
+              controls.minPolarAngle = Math.PI / 2; // radians
+              controls.minAzimuthAngle = -Math.PI / 6; // radians
+              controls.maxAzimuthAngle = (Math.PI * 5) / 6; // radians
+              controls.rotateSpeed = 0.7;
+              controls.enablePan = false;
+              controls.autoRotate = true;
+              controls.autoRotateSpeed = 2.0;
+            }
 
-					new Promise( function ( resolve, reject ) {
+            // console.log("once");
+          }
+        }
+        // console.log(camera.position);
+        if (animationComplete) {
+          if (camera.position.x < 1.85) {
+            controls.autoRotate = false;
+          }
+          controls.update();
+        }
 
-						var loader = new THREE.FileLoader( new THREE.LoadingManager() );
-						loader.setResponseType( 'arraybuffer' );
-						loader.load( model_url, resolve, onProgress);
-
-					} ).then( function ( buffer ) {
-						return JSZip.loadAsync( buffer ).then(function(zip) {
-							// console.log(zip);
-								    return zip.file(unzipped_name).async("string");
-								});;
-					} ).then( function ( text ) {
-						// console.log(text);
-						onLoad( THREE.PLYLoader.prototype.parse( text ) );
-					});
-				}
-
-				window.addEventListener( 'resize', onWindowResize, false );
-				window.addEventListener( 'keypress', keyboard );
-			}
-			function onWindowResize() {
-				camera.aspect = container.offsetWidth / container.offsetHeight;
-				camera.updateProjectionMatrix();
-				renderer.setSize( container.offsetWidth, container.offsetHeight );
-				// controls.handleResize();
-			}
-			function getRandom(min, max) {
-			    return Math.random() * (max - min) + min;
-			}
-			var prevHue = getRandom(0, 1);
-			var prevSat = getRandom(0.4, 0.8);
-			var prevLight = getRandom(0.6, 0.8);
-			// var flashingHue = 0;
-			function changeColor(mode) { //mode = 1 is flashing dark mode, mode = 2 is brighter than normal, 3 is normal
-
-				// var randHue = mode == 1 ? (flashingHue + 0.1) % 1 : getRandom(0, 1);
-				var randHue = getRandom(0, 1);
-				var randSat = mode == 1 ? 0.9 : getRandom(0.4, 0.8);
-				var randLight = mode == 1 ? 0.1 : getRandom(0.6, 0.8);
-				// flashingHue = randHue;
-				if (mode == 2) {
-					var hueDistance = Math.abs(prevHue - randHue);
-					hueDistance = Math.min(hueDistance, 1 - hueDistance);
-					while (prevHue !== -1 && hueDistance < 0.1) {
-						randHue = getRandom(0, 1);
-						hueDistance = Math.abs(prevHue - randHue);
-						hueDistance = Math.min(hueDistance, 1 - hueDistance);
-						// console.log("in loop");
-					}
-					// console.log(prevHue);
-					prevHue = randHue;
-					prevSat = randSat;
-					prevLight = randLight;
-				} else if (mode == 3) {
-					randHue = prevHue;
-					randSat = prevSat;
-					randLight = prevLight;
-				}
-				// console.log(randHue);
-
-				points.material.color.setHSL(randHue, randSat, randLight );
-				// console.log(randHue, randSat, randLight);
-				points.material.needsUpdate = true;
-			}
-			function keyboard( ev ) {
-				switch ( ev.key || String.fromCharCode( ev.keyCode || ev.charCode ) ) {
-					case '+':
-						points.material.size *= 1.2;
-						points.material.needsUpdate = true;
-						break;
-					case '-':
-						points.material.size /= 1.2;
-						points.material.needsUpdate = true;
-						break;
-					case 'c':
-						changeColor(2);
-						break;
-				}
-			}
-			var animationComplete = false;
-			var last = 0;
-			var changeTime = 15;
-			var flashTime = 0.5;
-			var flashBrightStarted = false;
-			function animate(now) {
-				requestAnimationFrame( animate );
-				if (!last || now - last >= changeTime*1000) { // the normal display interval
-			        last = now;
-			        changeColor(3);
-					if (flashBrightStarted) {
-						points.material.size /= 1.8;
-						flashBrightStarted = false;
-					}
-					// changeTime = getRandom(2, 3);
-			    } else if (now - last >= changeTime*1000 - (flashTime*0.2)*1000) { // the flash bright interval
-					if (!flashBrightStarted) {
-						changeColor(2);
-					} else {
-						changeColor(3);
-					}
-
-					if (!flashBrightStarted) {
-						points.material.size *= 1.8;
-						flashBrightStarted = true;
-					}
-
-				} else if (now - last >= changeTime*1000 - flashTime*1000) { // the flashing dark (flashing color) interval
-					changeColor(1);
-				}
-				if (center && (!animationComplete)) {
-					if (camera.position.y > 0.001) {
-						camera.position.y -= 0.01;
-						camera.position.x += 0.005;
-						camera.lookAt(center);
-					} else {
-						animationComplete = true;
-						// controls
-						{
-							controls = new THREE.OrbitControls(camera, container);
-							controls.dampingFactor = 0.25;
-							controls.screenSpacePanning = true;
-							controls.minDistance = 2;
-							controls.maxDistance = 2;
-							controls.maxPolarAngle = Math.PI / 2;
-							controls.minPolarAngle = Math.PI / 2; // radians
-							controls.minAzimuthAngle = - Math.PI / 6; // radians
-							controls.maxAzimuthAngle = Math.PI * 5 / 6; // radians
-							controls.rotateSpeed = 0.7;
-							controls.enablePan = false;
-							controls.autoRotate = true;
-							controls.autoRotateSpeed = 2.0;
-
-						}
-
-						// console.log("once");
-					}
-				}
-				// console.log(camera.position);
-				if (animationComplete) {
-					if (camera.position.x < 1.85) {
-						controls.autoRotate = false;
-					}
-					controls.update();
-				}
-
-				renderer.render( scene, camera );
-			}
-
-		</script>
-
-	</body>
+        renderer.render(scene, camera);
+      }
+    </script>
+  </body>
 </html>
